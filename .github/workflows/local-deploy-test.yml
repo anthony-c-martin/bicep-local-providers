@@ -52,4 +52,5 @@ jobs:
 
       - name: Make request to echo-server service
         run: |
-          curl -I localhost:8080
+          MINIKUBE_IP=$(minikube ip || exit 1)
+          curl -I $MINIKUBE_IP:8080
