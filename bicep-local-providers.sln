@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3294B2A4-532C-4203-8995-E3490C2CDF8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bicep.Extension", "src\Bicep.Extension\Bicep.Extension.csproj", "{80B6274E-D005-44AE-B039-1E72AB75F178}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bicep.Extension.GitHub", "src\Bicep.Extension.Github\Bicep.Extension.GitHub.csproj", "{BE86EE0D-B085-4510-BB8C-422D2423619D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bicep.Extension.Utils", "src\Bicep.Extension.Utils\Bicep.Extension.Utils.csproj", "{39990F3D-6452-4BA8-8717-DA0EC41963A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bicep.Extension.Kubernetes", "src\Bicep.Extension.Kubernetes\Bicep.Extension.Kubernetes.csproj", "{EA8FD064-EE32-48B3-A60E-296B1BC93401}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{80B6274E-D005-44AE-B039-1E72AB75F178}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80B6274E-D005-44AE-B039-1E72AB75F178}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80B6274E-D005-44AE-B039-1E72AB75F178}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80B6274E-D005-44AE-B039-1E72AB75F178}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE86EE0D-B085-4510-BB8C-422D2423619D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE86EE0D-B085-4510-BB8C-422D2423619D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE86EE0D-B085-4510-BB8C-422D2423619D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE86EE0D-B085-4510-BB8C-422D2423619D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39990F3D-6452-4BA8-8717-DA0EC41963A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39990F3D-6452-4BA8-8717-DA0EC41963A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39990F3D-6452-4BA8-8717-DA0EC41963A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39990F3D-6452-4BA8-8717-DA0EC41963A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA8FD064-EE32-48B3-A60E-296B1BC93401}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA8FD064-EE32-48B3-A60E-296B1BC93401}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA8FD064-EE32-48B3-A60E-296B1BC93401}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA8FD064-EE32-48B3-A60E-296B1BC93401}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{80B6274E-D005-44AE-B039-1E72AB75F178} = {3294B2A4-532C-4203-8995-E3490C2CDF8A}
+		{BE86EE0D-B085-4510-BB8C-422D2423619D} = {3294B2A4-532C-4203-8995-E3490C2CDF8A}
+		{39990F3D-6452-4BA8-8717-DA0EC41963A5} = {3294B2A4-532C-4203-8995-E3490C2CDF8A}
+		{EA8FD064-EE32-48B3-A60E-296B1BC93401} = {3294B2A4-532C-4203-8995-E3490C2CDF8A}
+	EndGlobalSection
+EndGlobal

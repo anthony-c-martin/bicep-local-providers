@@ -1,0 +1,26 @@
+AutoRest code generation utility [cli version: 3.7.1; node: v20.5.1]
+(C) 2018 Microsoft Corporation.
+https://aka.ms/autorest
+warning | SkippedSemanticValidation | Semantic validation was skipped.
+warning | PreCheck/CheckDuplicateSchemas | Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
+warning | Modeler/MissingType | The schema 'io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSONSchemaPropsOrBool' has no type or format information whatsoever. Location:
+   file:///Users/ant/Code/bicep-types-k8s/input/specification/kubernetes/resource-manager/kubernetes/preview/2021-01-01-preview/kubernetes.json#/components/schemas/io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSONSchemaPropsOrBool
+warning | Modeler/MissingType | The schema 'io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSON' has no type or format information whatsoever. Location:
+   file:///Users/ant/Code/bicep-types-k8s/input/specification/kubernetes/resource-manager/kubernetes/preview/2021-01-01-preview/kubernetes.json#/components/schemas/io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSON
+warning | Modeler/MissingType | The schema 'io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSONSchemaPropsOrStringArray' has no type or format information whatsoever. Location:
+   file:///Users/ant/Code/bicep-types-k8s/input/specification/kubernetes/resource-manager/kubernetes/preview/2021-01-01-preview/kubernetes.json#/components/schemas/io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSONSchemaPropsOrStringArray
+warning | Modeler/MissingType | The schema 'io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSONSchemaPropsOrArray' has no type or format information whatsoever. Location:
+   file:///Users/ant/Code/bicep-types-k8s/input/specification/kubernetes/resource-manager/kubernetes/preview/2021-01-01-preview/kubernetes.json#/components/schemas/io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSONSchemaPropsOrArray
+warning | Unrecognized property type: byte-array. Returning 'any'.
+warning | Unrecognized property type: any-object. Returning 'any'.
+warning | Unrecognized property type: byte-array. Returning 'any'.
+warning | Unrecognized property type: byte-array. Returning 'any'.
+warning | Unrecognized property type: byte-array. Returning 'any'.
+warning | Unrecognized property type: any-object. Returning 'any'.
+warning | Unrecognized property type: byte-array. Returning 'any'.
+warning | Unrecognized property type: any-object. Returning 'any'.
+warning | Unrecognized property type: any-object. Returning 'any'.
+warning | Unrecognized property type: any-object. Returning 'any'.
+warning | Unrecognized property type: byte-array. Returning 'any'.
+warning | Unrecognized property type: byte-array. Returning 'any'.
+warning | Unrecognized property type: any-object. Returning 'any'.

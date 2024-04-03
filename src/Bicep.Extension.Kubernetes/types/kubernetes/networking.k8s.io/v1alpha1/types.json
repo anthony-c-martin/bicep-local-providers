@@ -1,0 +1,220 @@
+[
+  {
+    "$type": "StringLiteralType",
+    "value": "ClusterCIDR"
+  },
+  {
+    "$type": "StringLiteralType",
+    "value": "networking.k8s.io/v1alpha1"
+  },
+  {
+    "$type": "StringType"
+  },
+  {
+    "$type": "ObjectType",
+    "name": "labels",
+    "properties": {},
+    "additionalProperties": {
+      "$ref": "#/2"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "annotations",
+    "properties": {},
+    "additionalProperties": {
+      "$ref": "#/2"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "metadata",
+    "properties": {
+      "name": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 9,
+        "description": "The name of the resource."
+      },
+      "labels": {
+        "type": {
+          "$ref": "#/3"
+        },
+        "flags": 0,
+        "description": "The labels for the resource."
+      },
+      "annotations": {
+        "type": {
+          "$ref": "#/4"
+        },
+        "flags": 0,
+        "description": "The annotations for the resource."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiNetworkingV1Alpha1ClusterCidrSpec",
+    "properties": {
+      "ipv4": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "IPv4 defines an IPv4 IP block in CIDR notation(e.g. \"10.0.0.0/8\"). At least one of IPv4 and IPv6 must be specified. This field is immutable."
+      },
+      "ipv6": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "IPv6 defines an IPv6 IP block in CIDR notation(e.g. \"fd12:3456:789a:1::/64\"). At least one of IPv4 and IPv6 must be specified. This field is immutable."
+      },
+      "nodeSelector": {
+        "type": {
+          "$ref": "#/7"
+        },
+        "flags": 0,
+        "description": "A node selector represents the union of the results of one or more label queries over a set of nodes; that is, it represents the OR of the selectors represented by the node selector terms."
+      },
+      "perNodeHostBits": {
+        "type": {
+          "$ref": "#/14"
+        },
+        "flags": 1,
+        "description": "PerNodeHostBits defines the number of host bits to be configured per node. A subnet mask determines how much of the address is used for network bits and host bits. For example an IPv4 address of 192.168.0.0/24, splits the address into 24 bits for the network portion and 8 bits for the host portion. To allocate 256 IPs, set this field to 8 (a /24 mask for IPv4 or a /120 for IPv6). Minimum value is 4 (16 IPs). This field is immutable."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiCoreV1NodeSelector",
+    "properties": {
+      "nodeSelectorTerms": {
+        "type": {
+          "$ref": "#/13"
+        },
+        "flags": 1,
+        "description": "Required. A list of node selector terms. The terms are ORed."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiCoreV1NodeSelectorTerm",
+    "properties": {
+      "matchExpressions": {
+        "type": {
+          "$ref": "#/11"
+        },
+        "flags": 0,
+        "description": "A list of node selector requirements by node's labels."
+      },
+      "matchFields": {
+        "type": {
+          "$ref": "#/12"
+        },
+        "flags": 0,
+        "description": "A list of node selector requirements by node's fields."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiCoreV1NodeSelectorRequirement",
+    "properties": {
+      "key": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "The label key that the selector applies to."
+      },
+      "operator": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "Represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt."
+      },
+      "values": {
+        "type": {
+          "$ref": "#/10"
+        },
+        "flags": 0,
+        "description": "An array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. If the operator is Gt or Lt, the values array must have a single element, which will be interpreted as an integer. This array is replaced during a strategic merge patch."
+      }
+    }
+  },
+  {
+    "$type": "ArrayType",
+    "itemType": {
+      "$ref": "#/2"
+    }
+  },
+  {
+    "$type": "ArrayType",
+    "itemType": {
+      "$ref": "#/9"
+    }
+  },
+  {
+    "$type": "ArrayType",
+    "itemType": {
+      "$ref": "#/9"
+    }
+  },
+  {
+    "$type": "ArrayType",
+    "itemType": {
+      "$ref": "#/8"
+    }
+  },
+  {
+    "$type": "IntegerType"
+  },
+  {
+    "$type": "ObjectType",
+    "name": "networking.k8s.io/ClusterCIDR",
+    "properties": {
+      "kind": {
+        "type": {
+          "$ref": "#/0"
+        },
+        "flags": 10,
+        "description": "The resource kind."
+      },
+      "apiVersion": {
+        "type": {
+          "$ref": "#/1"
+        },
+        "flags": 10,
+        "description": "The api version."
+      },
+      "metadata": {
+        "type": {
+          "$ref": "#/5"
+        },
+        "flags": 1,
+        "description": "The resource metadata."
+      },
+      "spec": {
+        "type": {
+          "$ref": "#/6"
+        },
+        "flags": 0,
+        "description": "ClusterCIDRSpec defines the desired state of ClusterCIDR."
+      }
+    }
+  },
+  {
+    "$type": "ResourceType",
+    "name": "networking.k8s.io/ClusterCIDR@v1alpha1",
+    "scopeType": 0,
+    "body": {
+      "$ref": "#/15"
+    },
+    "flags": 0
+  }
+]

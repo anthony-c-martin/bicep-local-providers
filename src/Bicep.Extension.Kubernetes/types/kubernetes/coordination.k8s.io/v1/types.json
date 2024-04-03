@@ -1,0 +1,150 @@
+[
+  {
+    "$type": "StringLiteralType",
+    "value": "Lease"
+  },
+  {
+    "$type": "StringLiteralType",
+    "value": "coordination.k8s.io/v1"
+  },
+  {
+    "$type": "StringType"
+  },
+  {
+    "$type": "ObjectType",
+    "name": "labels",
+    "properties": {},
+    "additionalProperties": {
+      "$ref": "#/2"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "annotations",
+    "properties": {},
+    "additionalProperties": {
+      "$ref": "#/2"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "metadata",
+    "properties": {
+      "name": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 9,
+        "description": "The name of the resource."
+      },
+      "namespace": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 8,
+        "description": "The namespace of the resource."
+      },
+      "labels": {
+        "type": {
+          "$ref": "#/3"
+        },
+        "flags": 0,
+        "description": "The labels for the resource."
+      },
+      "annotations": {
+        "type": {
+          "$ref": "#/4"
+        },
+        "flags": 0,
+        "description": "The annotations for the resource."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiCoordinationV1LeaseSpec",
+    "properties": {
+      "acquireTime": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "MicroTime is version of Time with microsecond level precision."
+      },
+      "holderIdentity": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "holderIdentity contains the identity of the holder of a current lease."
+      },
+      "leaseDurationSeconds": {
+        "type": {
+          "$ref": "#/7"
+        },
+        "flags": 0,
+        "description": "leaseDurationSeconds is a duration that candidates for a lease need to wait to force acquire it. This is measure against time of last observed RenewTime."
+      },
+      "leaseTransitions": {
+        "type": {
+          "$ref": "#/7"
+        },
+        "flags": 0,
+        "description": "leaseTransitions is the number of transitions of a lease between holders."
+      },
+      "renewTime": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "MicroTime is version of Time with microsecond level precision."
+      }
+    }
+  },
+  {
+    "$type": "IntegerType"
+  },
+  {
+    "$type": "ObjectType",
+    "name": "coordination.k8s.io/Lease",
+    "properties": {
+      "kind": {
+        "type": {
+          "$ref": "#/0"
+        },
+        "flags": 10,
+        "description": "The resource kind."
+      },
+      "apiVersion": {
+        "type": {
+          "$ref": "#/1"
+        },
+        "flags": 10,
+        "description": "The api version."
+      },
+      "metadata": {
+        "type": {
+          "$ref": "#/5"
+        },
+        "flags": 1,
+        "description": "The resource metadata."
+      },
+      "spec": {
+        "type": {
+          "$ref": "#/6"
+        },
+        "flags": 0,
+        "description": "LeaseSpec is a specification of a Lease."
+      }
+    }
+  },
+  {
+    "$type": "ResourceType",
+    "name": "coordination.k8s.io/Lease@v1",
+    "scopeType": 0,
+    "body": {
+      "$ref": "#/8"
+    },
+    "flags": 0
+  }
+]

@@ -1,0 +1,327 @@
+[
+  {
+    "$type": "StringLiteralType",
+    "value": "PodDisruptionBudget"
+  },
+  {
+    "$type": "StringLiteralType",
+    "value": "policy/v1"
+  },
+  {
+    "$type": "StringType"
+  },
+  {
+    "$type": "ObjectType",
+    "name": "labels",
+    "properties": {},
+    "additionalProperties": {
+      "$ref": "#/2"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "annotations",
+    "properties": {},
+    "additionalProperties": {
+      "$ref": "#/2"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "metadata",
+    "properties": {
+      "name": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 9,
+        "description": "The name of the resource."
+      },
+      "namespace": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 8,
+        "description": "The namespace of the resource."
+      },
+      "labels": {
+        "type": {
+          "$ref": "#/3"
+        },
+        "flags": 0,
+        "description": "The labels for the resource."
+      },
+      "annotations": {
+        "type": {
+          "$ref": "#/4"
+        },
+        "flags": 0,
+        "description": "The annotations for the resource."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiPolicyV1PodDisruptionBudgetSpec",
+    "properties": {
+      "maxUnavailable": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "IntOrString is a type that can hold an int32 or a string.  When used in JSON or YAML marshalling and unmarshalling, it produces or consumes the inner type.  This allows you to have, for example, a JSON field that can accept a name or number."
+      },
+      "minAvailable": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "IntOrString is a type that can hold an int32 or a string.  When used in JSON or YAML marshalling and unmarshalling, it produces or consumes the inner type.  This allows you to have, for example, a JSON field that can accept a name or number."
+      },
+      "selector": {
+        "type": {
+          "$ref": "#/7"
+        },
+        "flags": 0,
+        "description": "A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApimachineryPkgApisMetaV1LabelSelector",
+    "properties": {
+      "matchExpressions": {
+        "type": {
+          "$ref": "#/10"
+        },
+        "flags": 0,
+        "description": "matchExpressions is a list of label selector requirements. The requirements are ANDed."
+      },
+      "matchLabels": {
+        "type": {
+          "$ref": "#/11"
+        },
+        "flags": 0,
+        "description": "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is \"key\", the operator is \"In\", and the values array contains only \"value\". The requirements are ANDed."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApimachineryPkgApisMetaV1LabelSelectorRequirement",
+    "properties": {
+      "key": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "key is the label key that the selector applies to."
+      },
+      "operator": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist."
+      },
+      "values": {
+        "type": {
+          "$ref": "#/9"
+        },
+        "flags": 0,
+        "description": "values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch."
+      }
+    }
+  },
+  {
+    "$type": "ArrayType",
+    "itemType": {
+      "$ref": "#/2"
+    }
+  },
+  {
+    "$type": "ArrayType",
+    "itemType": {
+      "$ref": "#/8"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApimachineryPkgApisMetaV1LabelSelectorMatchLabels",
+    "properties": {},
+    "additionalProperties": {
+      "$ref": "#/2"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiPolicyV1PodDisruptionBudgetStatus",
+    "properties": {
+      "conditions": {
+        "type": {
+          "$ref": "#/15"
+        },
+        "flags": 0,
+        "description": "Conditions contain conditions for PDB. The disruption controller sets the DisruptionAllowed condition. The following are known values for the reason field (additional reasons could be added in the future): - SyncFailed: The controller encountered an error and wasn't able to compute\n              the number of allowed disruptions. Therefore no disruptions are\n              allowed and the status of the condition will be False.\n- InsufficientPods: The number of pods are either at or below the number\n                    required by the PodDisruptionBudget. No disruptions are\n                    allowed and the status of the condition will be False.\n- SufficientPods: There are more pods than required by the PodDisruptionBudget.\n                  The condition will be True, and the number of allowed\n                  disruptions are provided by the disruptionsAllowed property."
+      },
+      "currentHealthy": {
+        "type": {
+          "$ref": "#/14"
+        },
+        "flags": 1,
+        "description": "current number of healthy pods"
+      },
+      "desiredHealthy": {
+        "type": {
+          "$ref": "#/14"
+        },
+        "flags": 1,
+        "description": "minimum desired number of healthy pods"
+      },
+      "disruptedPods": {
+        "type": {
+          "$ref": "#/16"
+        },
+        "flags": 0,
+        "description": "DisruptedPods contains information about pods whose eviction was processed by the API server eviction subresource handler but has not yet been observed by the PodDisruptionBudget controller. A pod will be in this map from the time when the API server processed the eviction request to the time when the pod is seen by PDB controller as having been marked for deletion (or after a timeout). The key in the map is the name of the pod and the value is the time when the API server processed the eviction request. If the deletion didn't occur and a pod is still there it will be removed from the list automatically by PodDisruptionBudget controller after some time. If everything goes smooth this map should be empty for the most of the time. Large number of entries in the map may indicate problems with pod deletions."
+      },
+      "disruptionsAllowed": {
+        "type": {
+          "$ref": "#/14"
+        },
+        "flags": 1,
+        "description": "Number of pod disruptions that are currently allowed."
+      },
+      "expectedPods": {
+        "type": {
+          "$ref": "#/14"
+        },
+        "flags": 1,
+        "description": "total number of pods counted by this disruption budget"
+      },
+      "observedGeneration": {
+        "type": {
+          "$ref": "#/14"
+        },
+        "flags": 0,
+        "description": "Most recent generation observed when updating this PDB status. DisruptionsAllowed and other status information is valid only if observedGeneration equals to PDB's object generation."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApimachineryPkgApisMetaV1Condition",
+    "properties": {
+      "lastTransitionTime": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers."
+      },
+      "message": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "message is a human readable message indicating details about the transition. This may be an empty string."
+      },
+      "observedGeneration": {
+        "type": {
+          "$ref": "#/14"
+        },
+        "flags": 0,
+        "description": "observedGeneration represents the .metadata.generation that the condition was set based upon. For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date with respect to the current state of the instance."
+      },
+      "reason": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "reason contains a programmatic identifier indicating the reason for the condition's last transition. Producers of specific condition types may define expected values and meanings for this field, and whether the values are considered a guaranteed API. The value should be a CamelCase string. This field may not be empty."
+      },
+      "status": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "status of the condition, one of True, False, Unknown."
+      },
+      "type": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "type of condition in CamelCase or in foo.example.com/CamelCase."
+      }
+    }
+  },
+  {
+    "$type": "IntegerType"
+  },
+  {
+    "$type": "ArrayType",
+    "itemType": {
+      "$ref": "#/13"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiPolicyV1PodDisruptionBudgetStatusDisruptedPods",
+    "properties": {},
+    "additionalProperties": {
+      "$ref": "#/2"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "policy/PodDisruptionBudget",
+    "properties": {
+      "kind": {
+        "type": {
+          "$ref": "#/0"
+        },
+        "flags": 10,
+        "description": "The resource kind."
+      },
+      "apiVersion": {
+        "type": {
+          "$ref": "#/1"
+        },
+        "flags": 10,
+        "description": "The api version."
+      },
+      "metadata": {
+        "type": {
+          "$ref": "#/5"
+        },
+        "flags": 1,
+        "description": "The resource metadata."
+      },
+      "spec": {
+        "type": {
+          "$ref": "#/6"
+        },
+        "flags": 0,
+        "description": "PodDisruptionBudgetSpec is a description of a PodDisruptionBudget."
+      },
+      "status": {
+        "type": {
+          "$ref": "#/12"
+        },
+        "flags": 0,
+        "description": "PodDisruptionBudgetStatus represents information about the status of a PodDisruptionBudget. Status may trail the actual state of a system."
+      }
+    }
+  },
+  {
+    "$type": "ResourceType",
+    "name": "policy/PodDisruptionBudget@v1",
+    "scopeType": 0,
+    "body": {
+      "$ref": "#/17"
+    },
+    "flags": 0
+  }
+]

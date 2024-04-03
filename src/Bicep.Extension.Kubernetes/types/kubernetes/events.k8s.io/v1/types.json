@@ -1,0 +1,295 @@
+[
+  {
+    "$type": "StringLiteralType",
+    "value": "Event"
+  },
+  {
+    "$type": "StringLiteralType",
+    "value": "events.k8s.io/v1"
+  },
+  {
+    "$type": "StringType"
+  },
+  {
+    "$type": "ObjectType",
+    "name": "labels",
+    "properties": {},
+    "additionalProperties": {
+      "$ref": "#/2"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "annotations",
+    "properties": {},
+    "additionalProperties": {
+      "$ref": "#/2"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "metadata",
+    "properties": {
+      "name": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 9,
+        "description": "The name of the resource."
+      },
+      "namespace": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 8,
+        "description": "The namespace of the resource."
+      },
+      "labels": {
+        "type": {
+          "$ref": "#/3"
+        },
+        "flags": 0,
+        "description": "The labels for the resource."
+      },
+      "annotations": {
+        "type": {
+          "$ref": "#/4"
+        },
+        "flags": 0,
+        "description": "The annotations for the resource."
+      }
+    }
+  },
+  {
+    "$type": "IntegerType"
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiCoreV1EventSource",
+    "properties": {
+      "component": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "Component from which the event is generated."
+      },
+      "host": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "Node name on which the event is generated."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiCoreV1ObjectReference",
+    "properties": {
+      "apiVersion": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "API version of the referent."
+      },
+      "fieldPath": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "If referring to a piece of an object instead of an entire object, this string should contain a valid JSON/Go field access statement, such as desiredState.manifest.containers[2]. For example, if the object reference is to a container within a pod, this would take on a value like: \"spec.containers{name}\" (where \"name\" refers to the name of the container that triggered the event) or if no container name is specified \"spec.containers[2]\" (container with index 2 in this pod). This syntax is chosen only to have some well-defined way of referencing a part of an object."
+      },
+      "kind": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds"
+      },
+      "name": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names"
+      },
+      "namespace": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "Namespace of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/"
+      },
+      "resourceVersion": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "Specific resourceVersion to which this reference is made, if any. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency"
+      },
+      "uid": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids"
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiEventsV1EventSeries",
+    "properties": {
+      "count": {
+        "type": {
+          "$ref": "#/6"
+        },
+        "flags": 1,
+        "description": "count is the number of occurrences in this series up to the last heartbeat time."
+      },
+      "lastObservedTime": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "MicroTime is version of Time with microsecond level precision."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "events.k8s.io/Event",
+    "properties": {
+      "kind": {
+        "type": {
+          "$ref": "#/0"
+        },
+        "flags": 10,
+        "description": "The resource kind."
+      },
+      "apiVersion": {
+        "type": {
+          "$ref": "#/1"
+        },
+        "flags": 10,
+        "description": "The api version."
+      },
+      "metadata": {
+        "type": {
+          "$ref": "#/5"
+        },
+        "flags": 1,
+        "description": "The resource metadata."
+      },
+      "action": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "action is what action was taken/failed regarding to the regarding object. It is machine-readable. This field cannot be empty for new Events and it can have at most 128 characters."
+      },
+      "deprecatedCount": {
+        "type": {
+          "$ref": "#/6"
+        },
+        "flags": 0,
+        "description": "deprecatedCount is the deprecated field assuring backward compatibility with core.v1 Event type."
+      },
+      "deprecatedFirstTimestamp": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers."
+      },
+      "deprecatedLastTimestamp": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers."
+      },
+      "deprecatedSource": {
+        "type": {
+          "$ref": "#/7"
+        },
+        "flags": 0,
+        "description": "EventSource contains information for an event."
+      },
+      "eventTime": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "MicroTime is version of Time with microsecond level precision."
+      },
+      "note": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "note is a human-readable description of the status of this operation. Maximal length of the note is 1kB, but libraries should be prepared to handle values up to 64kB."
+      },
+      "reason": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "reason is why the action was taken. It is human-readable. This field cannot be empty for new Events and it can have at most 128 characters."
+      },
+      "regarding": {
+        "type": {
+          "$ref": "#/8"
+        },
+        "flags": 0,
+        "description": "ObjectReference contains enough information to let you inspect or modify the referred object."
+      },
+      "related": {
+        "type": {
+          "$ref": "#/8"
+        },
+        "flags": 0,
+        "description": "ObjectReference contains enough information to let you inspect or modify the referred object."
+      },
+      "reportingController": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "reportingController is the name of the controller that emitted this Event, e.g. `kubernetes.io/kubelet`. This field cannot be empty for new Events."
+      },
+      "reportingInstance": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "reportingInstance is the ID of the controller instance, e.g. `kubelet-xyzf`. This field cannot be empty for new Events and it can have at most 128 characters."
+      },
+      "series": {
+        "type": {
+          "$ref": "#/9"
+        },
+        "flags": 0,
+        "description": "EventSeries contain information on series of events, i.e. thing that was/is happening continuously for some time. How often to update the EventSeries is up to the event reporters. The default event reporter in \"k8s.io/client-go/tools/events/event_broadcaster.go\" shows how this struct is updated on heartbeats and can guide customized reporter implementations."
+      },
+      "type": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "type is the type of this event (Normal, Warning), new types could be added in the future. It is machine-readable. This field cannot be empty for new Events."
+      }
+    }
+  },
+  {
+    "$type": "ResourceType",
+    "name": "events.k8s.io/Event@v1",
+    "scopeType": 0,
+    "body": {
+      "$ref": "#/10"
+    },
+    "flags": 0
+  }
+]

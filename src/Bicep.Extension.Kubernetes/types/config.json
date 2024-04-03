@@ -1,0 +1,35 @@
+[
+  {
+    "$type": "StringType"
+  },
+  {
+    "$type": "StringType",
+    "sensitive": true
+  },
+  {
+    "$type": "ObjectType",
+    "name": "configuration",
+    "properties": {
+      "namespace": {
+        "type": {
+          "$ref": "#/0"
+        },
+        "flags": 1,
+        "description": "The default Kubernetes namespace to deploy resources to."
+      },
+      "kubeConfig": {
+        "type": {
+          "$ref": "#/1"
+        },
+        "flags": 1,
+        "description": "The Kubernetes configuration file, base-64 encoded."
+      },
+      "context": {
+        "type": {
+          "$ref": "#/0"
+        },
+        "flags": 0
+      }
+    }
+  }
+]

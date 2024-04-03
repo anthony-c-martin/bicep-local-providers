@@ -1,0 +1,212 @@
+[
+  {
+    "$type": "StringLiteralType",
+    "value": "RuntimeClass"
+  },
+  {
+    "$type": "StringLiteralType",
+    "value": "node.k8s.io/v1"
+  },
+  {
+    "$type": "StringType"
+  },
+  {
+    "$type": "ObjectType",
+    "name": "labels",
+    "properties": {},
+    "additionalProperties": {
+      "$ref": "#/2"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "annotations",
+    "properties": {},
+    "additionalProperties": {
+      "$ref": "#/2"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "metadata",
+    "properties": {
+      "name": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 9,
+        "description": "The name of the resource."
+      },
+      "labels": {
+        "type": {
+          "$ref": "#/3"
+        },
+        "flags": 0,
+        "description": "The labels for the resource."
+      },
+      "annotations": {
+        "type": {
+          "$ref": "#/4"
+        },
+        "flags": 0,
+        "description": "The annotations for the resource."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiNodeV1Overhead",
+    "properties": {
+      "podFixed": {
+        "type": {
+          "$ref": "#/7"
+        },
+        "flags": 0,
+        "description": "PodFixed represents the fixed resource overhead associated with running a pod."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiNodeV1OverheadPodFixed",
+    "properties": {},
+    "additionalProperties": {
+      "$ref": "#/2"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiNodeV1Scheduling",
+    "properties": {
+      "nodeSelector": {
+        "type": {
+          "$ref": "#/9"
+        },
+        "flags": 0,
+        "description": "nodeSelector lists labels that must be present on nodes that support this RuntimeClass. Pods using this RuntimeClass can only be scheduled to a node matched by this selector. The RuntimeClass nodeSelector is merged with a pod's existing nodeSelector. Any conflicts will cause the pod to be rejected in admission."
+      },
+      "tolerations": {
+        "type": {
+          "$ref": "#/12"
+        },
+        "flags": 0,
+        "description": "tolerations are appended (excluding duplicates) to pods running with this RuntimeClass during admission, effectively unioning the set of nodes tolerated by the pod and the RuntimeClass."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiNodeV1SchedulingNodeSelector",
+    "properties": {},
+    "additionalProperties": {
+      "$ref": "#/2"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiCoreV1Toleration",
+    "properties": {
+      "effect": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "Effect indicates the taint effect to match. Empty means match all taint effects. When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute."
+      },
+      "key": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "Key is the taint key that the toleration applies to. Empty means match all taint keys. If the key is empty, operator must be Exists; this combination means to match all values and all keys."
+      },
+      "operator": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "Operator represents a key's relationship to the value. Valid operators are Exists and Equal. Defaults to Equal. Exists is equivalent to wildcard for value, so that a pod can tolerate all taints of a particular category."
+      },
+      "tolerationSeconds": {
+        "type": {
+          "$ref": "#/11"
+        },
+        "flags": 0,
+        "description": "TolerationSeconds represents the period of time the toleration (which must be of effect NoExecute, otherwise this field is ignored) tolerates the taint. By default, it is not set, which means tolerate the taint forever (do not evict). Zero and negative values will be treated as 0 (evict immediately) by the system."
+      },
+      "value": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "Value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string."
+      }
+    }
+  },
+  {
+    "$type": "IntegerType"
+  },
+  {
+    "$type": "ArrayType",
+    "itemType": {
+      "$ref": "#/10"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "node.k8s.io/RuntimeClass",
+    "properties": {
+      "kind": {
+        "type": {
+          "$ref": "#/0"
+        },
+        "flags": 10,
+        "description": "The resource kind."
+      },
+      "apiVersion": {
+        "type": {
+          "$ref": "#/1"
+        },
+        "flags": 10,
+        "description": "The api version."
+      },
+      "metadata": {
+        "type": {
+          "$ref": "#/5"
+        },
+        "flags": 1,
+        "description": "The resource metadata."
+      },
+      "handler": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "Handler specifies the underlying runtime and configuration that the CRI implementation will use to handle pods of this class. The possible values are specific to the node & CRI configuration.  It is assumed that all handlers are available on every node, and handlers of the same name are equivalent on every node. For example, a handler called \"runc\" might specify that the runc OCI runtime (using native Linux containers) will be used to run the containers in a pod. The Handler must be lowercase, conform to the DNS Label (RFC 1123) requirements, and is immutable."
+      },
+      "overhead": {
+        "type": {
+          "$ref": "#/6"
+        },
+        "flags": 0,
+        "description": "Overhead structure represents the resource overhead associated with running a pod."
+      },
+      "scheduling": {
+        "type": {
+          "$ref": "#/8"
+        },
+        "flags": 0,
+        "description": "Scheduling specifies the scheduling constraints for nodes supporting a RuntimeClass."
+      }
+    }
+  },
+  {
+    "$type": "ResourceType",
+    "name": "node.k8s.io/RuntimeClass@v1",
+    "scopeType": 0,
+    "body": {
+      "$ref": "#/13"
+    },
+    "flags": 0
+  }
+]

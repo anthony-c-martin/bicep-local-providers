@@ -1,0 +1,359 @@
+[
+  {
+    "$type": "StringLiteralType",
+    "value": "Scale"
+  },
+  {
+    "$type": "StringLiteralType",
+    "value": "autoscaling/v1"
+  },
+  {
+    "$type": "StringType"
+  },
+  {
+    "$type": "ObjectType",
+    "name": "labels",
+    "properties": {},
+    "additionalProperties": {
+      "$ref": "#/2"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "annotations",
+    "properties": {},
+    "additionalProperties": {
+      "$ref": "#/2"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "metadata",
+    "properties": {
+      "name": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 9,
+        "description": "The name of the resource."
+      },
+      "namespace": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 8,
+        "description": "The namespace of the resource."
+      },
+      "labels": {
+        "type": {
+          "$ref": "#/3"
+        },
+        "flags": 0,
+        "description": "The labels for the resource."
+      },
+      "annotations": {
+        "type": {
+          "$ref": "#/4"
+        },
+        "flags": 0,
+        "description": "The annotations for the resource."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiAutoscalingV1ScaleSpec",
+    "properties": {
+      "replicas": {
+        "type": {
+          "$ref": "#/7"
+        },
+        "flags": 0,
+        "description": "desired number of instances for the scaled object."
+      }
+    }
+  },
+  {
+    "$type": "IntegerType"
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiAutoscalingV1ScaleStatus",
+    "properties": {
+      "replicas": {
+        "type": {
+          "$ref": "#/7"
+        },
+        "flags": 1,
+        "description": "actual number of observed instances of the scaled object."
+      },
+      "selector": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "label query over pods that should match the replicas count. This is same as the label selector but in the string format to avoid introspection by clients. The string will be in the same format as the query-param syntax. More info about label selectors: http://kubernetes.io/docs/user-guide/labels#label-selectors"
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "autoscaling/Scale",
+    "properties": {
+      "kind": {
+        "type": {
+          "$ref": "#/0"
+        },
+        "flags": 10,
+        "description": "The resource kind."
+      },
+      "apiVersion": {
+        "type": {
+          "$ref": "#/1"
+        },
+        "flags": 10,
+        "description": "The api version."
+      },
+      "metadata": {
+        "type": {
+          "$ref": "#/5"
+        },
+        "flags": 1,
+        "description": "The resource metadata."
+      },
+      "spec": {
+        "type": {
+          "$ref": "#/6"
+        },
+        "flags": 0,
+        "description": "ScaleSpec describes the attributes of a scale subresource."
+      },
+      "status": {
+        "type": {
+          "$ref": "#/8"
+        },
+        "flags": 0,
+        "description": "ScaleStatus represents the current status of a scale subresource."
+      }
+    }
+  },
+  {
+    "$type": "ResourceType",
+    "name": "autoscaling/Scale@v1",
+    "scopeType": 0,
+    "body": {
+      "$ref": "#/9"
+    },
+    "flags": 0
+  },
+  {
+    "$type": "StringLiteralType",
+    "value": "HorizontalPodAutoscaler"
+  },
+  {
+    "$type": "StringLiteralType",
+    "value": "autoscaling/v1"
+  },
+  {
+    "$type": "ObjectType",
+    "name": "labels",
+    "properties": {},
+    "additionalProperties": {
+      "$ref": "#/2"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "annotations",
+    "properties": {},
+    "additionalProperties": {
+      "$ref": "#/2"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "metadata",
+    "properties": {
+      "name": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 9,
+        "description": "The name of the resource."
+      },
+      "namespace": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 8,
+        "description": "The namespace of the resource."
+      },
+      "labels": {
+        "type": {
+          "$ref": "#/13"
+        },
+        "flags": 0,
+        "description": "The labels for the resource."
+      },
+      "annotations": {
+        "type": {
+          "$ref": "#/14"
+        },
+        "flags": 0,
+        "description": "The annotations for the resource."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiAutoscalingV1HorizontalPodAutoscalerSpec",
+    "properties": {
+      "maxReplicas": {
+        "type": {
+          "$ref": "#/7"
+        },
+        "flags": 1,
+        "description": "upper limit for the number of pods that can be set by the autoscaler; cannot be smaller than MinReplicas."
+      },
+      "minReplicas": {
+        "type": {
+          "$ref": "#/7"
+        },
+        "flags": 0,
+        "description": "minReplicas is the lower limit for the number of replicas to which the autoscaler can scale down.  It defaults to 1 pod.  minReplicas is allowed to be 0 if the alpha feature gate HPAScaleToZero is enabled and at least one Object or External metric is configured.  Scaling is active as long as at least one metric value is available."
+      },
+      "scaleTargetRef": {
+        "type": {
+          "$ref": "#/17"
+        },
+        "flags": 1,
+        "description": "CrossVersionObjectReference contains enough information to let you identify the referred resource."
+      },
+      "targetCPUUtilizationPercentage": {
+        "type": {
+          "$ref": "#/7"
+        },
+        "flags": 0,
+        "description": "target average CPU utilization (represented as a percentage of requested CPU) over all the pods; if not specified the default autoscaling policy will be used."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiAutoscalingV1CrossVersionObjectReference",
+    "properties": {
+      "apiVersion": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "API version of the referent"
+      },
+      "kind": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "Kind of the referent; More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds\""
+      },
+      "name": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "Name of the referent; More info: http://kubernetes.io/docs/user-guide/identifiers#names"
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiAutoscalingV1HorizontalPodAutoscalerStatus",
+    "properties": {
+      "currentCPUUtilizationPercentage": {
+        "type": {
+          "$ref": "#/7"
+        },
+        "flags": 0,
+        "description": "current average CPU utilization over all pods, represented as a percentage of requested CPU, e.g. 70 means that an average pod is using now 70% of its requested CPU."
+      },
+      "currentReplicas": {
+        "type": {
+          "$ref": "#/7"
+        },
+        "flags": 1,
+        "description": "current number of replicas of pods managed by this autoscaler."
+      },
+      "desiredReplicas": {
+        "type": {
+          "$ref": "#/7"
+        },
+        "flags": 1,
+        "description": "desired number of replicas of pods managed by this autoscaler."
+      },
+      "lastScaleTime": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers."
+      },
+      "observedGeneration": {
+        "type": {
+          "$ref": "#/7"
+        },
+        "flags": 0,
+        "description": "most recent generation observed by this autoscaler."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "autoscaling/HorizontalPodAutoscaler",
+    "properties": {
+      "kind": {
+        "type": {
+          "$ref": "#/11"
+        },
+        "flags": 10,
+        "description": "The resource kind."
+      },
+      "apiVersion": {
+        "type": {
+          "$ref": "#/12"
+        },
+        "flags": 10,
+        "description": "The api version."
+      },
+      "metadata": {
+        "type": {
+          "$ref": "#/15"
+        },
+        "flags": 1,
+        "description": "The resource metadata."
+      },
+      "spec": {
+        "type": {
+          "$ref": "#/16"
+        },
+        "flags": 0,
+        "description": "specification of a horizontal pod autoscaler."
+      },
+      "status": {
+        "type": {
+          "$ref": "#/18"
+        },
+        "flags": 0,
+        "description": "current status of a horizontal pod autoscaler"
+      }
+    }
+  },
+  {
+    "$type": "ResourceType",
+    "name": "autoscaling/HorizontalPodAutoscaler@v1",
+    "scopeType": 0,
+    "body": {
+      "$ref": "#/19"
+    },
+    "flags": 0
+  }
+]

@@ -1,0 +1,257 @@
+[
+  {
+    "$type": "StringLiteralType",
+    "value": "APIService"
+  },
+  {
+    "$type": "StringLiteralType",
+    "value": "apiregistration.k8s.io/v1"
+  },
+  {
+    "$type": "StringType"
+  },
+  {
+    "$type": "ObjectType",
+    "name": "labels",
+    "properties": {},
+    "additionalProperties": {
+      "$ref": "#/2"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "annotations",
+    "properties": {},
+    "additionalProperties": {
+      "$ref": "#/2"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "metadata",
+    "properties": {
+      "name": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 9,
+        "description": "The name of the resource."
+      },
+      "labels": {
+        "type": {
+          "$ref": "#/3"
+        },
+        "flags": 0,
+        "description": "The labels for the resource."
+      },
+      "annotations": {
+        "type": {
+          "$ref": "#/4"
+        },
+        "flags": 0,
+        "description": "The annotations for the resource."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SKubeAggregatorPkgApisApiregistrationV1APIServiceSpec",
+    "properties": {
+      "caBundle": {
+        "type": {
+          "$ref": "#/7"
+        },
+        "flags": 0,
+        "description": "CABundle is a PEM encoded CA bundle which will be used to validate an API server's serving certificate. If unspecified, system trust roots on the apiserver are used."
+      },
+      "group": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "Group is the API group name this server hosts"
+      },
+      "groupPriorityMinimum": {
+        "type": {
+          "$ref": "#/8"
+        },
+        "flags": 1,
+        "description": "GroupPriorityMininum is the priority this group should have at least. Higher priority means that the group is preferred by clients over lower priority ones. Note that other versions of this group might specify even higher GroupPriorityMininum values such that the whole group gets a higher priority. The primary sort is based on GroupPriorityMinimum, ordered highest number to lowest (20 before 10). The secondary sort is based on the alphabetical comparison of the name of the object.  (v1.bar before v1.foo) We'd recommend something like: *.k8s.io (except extensions) at 18000 and PaaSes (OpenShift, Deis) are recommended to be in the 2000s"
+      },
+      "insecureSkipTLSVerify": {
+        "type": {
+          "$ref": "#/9"
+        },
+        "flags": 0,
+        "description": "InsecureSkipTLSVerify disables TLS certificate verification when communicating with this server. This is strongly discouraged.  You should use the CABundle instead."
+      },
+      "service": {
+        "type": {
+          "$ref": "#/10"
+        },
+        "flags": 0,
+        "description": "ServiceReference holds a reference to Service.legacy.k8s.io"
+      },
+      "version": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "Version is the API version this server hosts.  For example, \"v1\""
+      },
+      "versionPriority": {
+        "type": {
+          "$ref": "#/8"
+        },
+        "flags": 1,
+        "description": "VersionPriority controls the ordering of this API version inside of its group.  Must be greater than zero. The primary sort is based on VersionPriority, ordered highest to lowest (20 before 10). Since it's inside of a group, the number can be small, probably in the 10s. In case of equal version priorities, the version string will be used to compute the order inside a group. If the version string is \"kube-like\", it will sort above non \"kube-like\" version strings, which are ordered lexicographically. \"Kube-like\" versions start with a \"v\", then are followed by a number (the major version), then optionally the string \"alpha\" or \"beta\" and another number (the minor version). These are sorted first by GA > beta > alpha (where GA is a version with no suffix such as beta or alpha), and then by comparing major version, then minor version. An example sorted list of versions: v10, v2, v1, v11beta2, v10beta3, v3beta1, v12alpha1, v11alpha2, foo1, foo10."
+      }
+    }
+  },
+  {
+    "$type": "AnyType"
+  },
+  {
+    "$type": "IntegerType"
+  },
+  {
+    "$type": "BooleanType"
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SKubeAggregatorPkgApisApiregistrationV1ServiceReference",
+    "properties": {
+      "name": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "Name is the name of the service"
+      },
+      "namespace": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "Namespace is the namespace of the service"
+      },
+      "port": {
+        "type": {
+          "$ref": "#/8"
+        },
+        "flags": 0,
+        "description": "If specified, the port on the service that hosting webhook. Default to 443 for backward compatibility. `port` should be a valid port number (1-65535, inclusive)."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SKubeAggregatorPkgApisApiregistrationV1APIServiceStatus",
+    "properties": {
+      "conditions": {
+        "type": {
+          "$ref": "#/13"
+        },
+        "flags": 0,
+        "description": "Current service state of apiService."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SKubeAggregatorPkgApisApiregistrationV1APIServiceCondition",
+    "properties": {
+      "lastTransitionTime": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers."
+      },
+      "message": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "Human-readable message indicating details about last transition."
+      },
+      "reason": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "Unique, one-word, CamelCase reason for the condition's last transition."
+      },
+      "status": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "Status is the status of the condition. Can be True, False, Unknown."
+      },
+      "type": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "Type is the type of the condition."
+      }
+    }
+  },
+  {
+    "$type": "ArrayType",
+    "itemType": {
+      "$ref": "#/12"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "apiregistration.k8s.io/APIService",
+    "properties": {
+      "kind": {
+        "type": {
+          "$ref": "#/0"
+        },
+        "flags": 10,
+        "description": "The resource kind."
+      },
+      "apiVersion": {
+        "type": {
+          "$ref": "#/1"
+        },
+        "flags": 10,
+        "description": "The api version."
+      },
+      "metadata": {
+        "type": {
+          "$ref": "#/5"
+        },
+        "flags": 1,
+        "description": "The resource metadata."
+      },
+      "spec": {
+        "type": {
+          "$ref": "#/6"
+        },
+        "flags": 0,
+        "description": "APIServiceSpec contains information for locating and communicating with a server. Only https is supported, though you are able to disable certificate verification."
+      },
+      "status": {
+        "type": {
+          "$ref": "#/11"
+        },
+        "flags": 0,
+        "description": "APIServiceStatus contains derived information about an API server"
+      }
+    }
+  },
+  {
+    "$type": "ResourceType",
+    "name": "apiregistration.k8s.io/APIService@v1",
+    "scopeType": 0,
+    "body": {
+      "$ref": "#/14"
+    },
+    "flags": 0
+  }
+]
