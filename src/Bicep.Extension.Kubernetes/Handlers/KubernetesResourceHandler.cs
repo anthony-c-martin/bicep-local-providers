@@ -34,9 +34,7 @@ public partial class KubernetesResourceHandler : IGenericResourceHandler
     {
         try 
         {
-            Trace.Write("ADDDD: " + JsonConvert.SerializeObject(request));
             var coreRequest = Convert(request);
-            Trace.Write("ADDDD: " + JsonConvert.SerializeObject(coreRequest));
             var coreResponse = await func(coreRequest);
 
             return Convert(coreResponse);

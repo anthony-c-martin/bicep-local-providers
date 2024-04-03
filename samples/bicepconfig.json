@@ -4,10 +4,11 @@
     "providerRegistry": true,
     "localDeploy": true
   },
+  "cloud": {"credentialPrecedence": ["Environment"]},
   "providers": {
     "az": "builtin:",
-    "kubernetes": "br:biceplocaldeploy.azurecr.io/providers/kubernetes:0.1.1",
-    "github": "br:biceplocaldeploy.azurecr.io/providers/github:0.1.1",
-    "utils": "br:biceplocaldeploy.azurecr.io/providers/utils:0.1.1"
+    "kubernetes": "br:biceplocaldeploy.azurecr.io/providers/kubernetes:0.1.2",
+    "github": "br:biceplocaldeploy.azurecr.io/providers/github:0.1.2",
+    "utils": "br:biceplocaldeploy.azurecr.io/providers/utils:0.1.2"
   }
 }
