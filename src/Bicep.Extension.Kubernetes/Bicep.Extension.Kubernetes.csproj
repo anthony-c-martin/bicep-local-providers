@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Bicep.Extension.Kubernetes</RootNamespace>
+    <StartupObject>Bicep.Extension.Kubernetes.Program</StartupObject>
+    <AssemblyName>bicep-ext-kubernetes</AssemblyName>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <PublishSingleFile>true</PublishSingleFile>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Bicep.Extension/Bicep.Extension.csproj" />
+    <PackageReference Include="Azure.Deployments.Extensibility.Providers.Kubernetes" Version="0.1.38" />
+  </ItemGroup>
+</Project>

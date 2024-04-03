@@ -1,0 +1,181 @@
+{
+  "resources": {
+    "admissionregistration.k8s.io/MutatingWebhookConfiguration@v1": {
+      "$ref": "kubernetes/admissionregistration.k8s.io/v1/types.json#/25"
+    },
+    "admissionregistration.k8s.io/ValidatingWebhookConfiguration@v1": {
+      "$ref": "kubernetes/admissionregistration.k8s.io/v1/types.json#/36"
+    },
+    "apiextensions.k8s.io/CustomResourceDefinition@v1": {
+      "$ref": "kubernetes/apiextensions.k8s.io/v1/types.json#/44"
+    },
+    "apiregistration.k8s.io/APIService@v1": {
+      "$ref": "kubernetes/apiregistration.k8s.io/v1/types.json#/15"
+    },
+    "apps/ControllerRevision@v1": {
+      "$ref": "kubernetes/apps/v1/types.json#/9"
+    },
+    "apps/DaemonSet@v1": {
+      "$ref": "kubernetes/apps/v1/types.json#/189"
+    },
+    "apps/Deployment@v1": {
+      "$ref": "kubernetes/apps/v1/types.json#/202"
+    },
+    "apps/ReplicaSet@v1": {
+      "$ref": "kubernetes/apps/v1/types.json#/213"
+    },
+    "apps/StatefulSet@v1": {
+      "$ref": "kubernetes/apps/v1/types.json#/235"
+    },
+    "autoscaling/Scale@v1": {
+      "$ref": "kubernetes/autoscaling/v1/types.json#/10"
+    },
+    "autoscaling/HorizontalPodAutoscaler@v1": {
+      "$ref": "kubernetes/autoscaling/v1/types.json#/20"
+    },
+    "autoscaling/HorizontalPodAutoscaler@v2": {
+      "$ref": "kubernetes/autoscaling/v2/types.json#/39"
+    },
+    "autoscaling/HorizontalPodAutoscaler@v2beta2": {
+      "$ref": "kubernetes/autoscaling/v2beta2/types.json#/39"
+    },
+    "batch/CronJob@v1": {
+      "$ref": "kubernetes/batch/v1/types.json#/189"
+    },
+    "batch/Job@v1": {
+      "$ref": "kubernetes/batch/v1/types.json#/202"
+    },
+    "certificates.k8s.io/CertificateSigningRequest@v1": {
+      "$ref": "kubernetes/certificates.k8s.io/v1/types.json#/17"
+    },
+    "coordination.k8s.io/Lease@v1": {
+      "$ref": "kubernetes/coordination.k8s.io/v1/types.json#/9"
+    },
+    "core/ConfigMap@v1": {
+      "$ref": "kubernetes/core/v1/types.json#/11"
+    },
+    "core/Endpoints@v1": {
+      "$ref": "kubernetes/core/v1/types.json#/27"
+    },
+    "core/Event@v1": {
+      "$ref": "kubernetes/core/v1/types.json#/36"
+    },
+    "core/LimitRange@v1": {
+      "$ref": "kubernetes/core/v1/types.json#/51"
+    },
+    "core/PersistentVolumeClaim@v1": {
+      "$ref": "kubernetes/core/v1/types.json#/75"
+    },
+    "core/Pod@v1": {
+      "$ref": "kubernetes/core/v1/types.json#/249"
+    },
+    "core/PodTemplate@v1": {
+      "$ref": "kubernetes/core/v1/types.json#/257"
+    },
+    "core/ReplicationController@v1": {
+      "$ref": "kubernetes/core/v1/types.json#/269"
+    },
+    "core/ResourceQuota@v1": {
+      "$ref": "kubernetes/core/v1/types.json#/286"
+    },
+    "core/Secret@v1": {
+      "$ref": "kubernetes/core/v1/types.json#/295"
+    },
+    "core/ServiceAccount@v1": {
+      "$ref": "kubernetes/core/v1/types.json#/304"
+    },
+    "core/Service@v1": {
+      "$ref": "kubernetes/core/v1/types.json#/329"
+    },
+    "core/Namespace@v1": {
+      "$ref": "kubernetes/core/v1/types.json#/341"
+    },
+    "core/Node@v1": {
+      "$ref": "kubernetes/core/v1/types.json#/371"
+    },
+    "core/PersistentVolume@v1": {
+      "$ref": "kubernetes/core/v1/types.json#/401"
+    },
+    "discovery.k8s.io/EndpointSlice@v1": {
+      "$ref": "kubernetes/discovery.k8s.io/v1/types.json#/20"
+    },
+    "events.k8s.io/Event@v1": {
+      "$ref": "kubernetes/events.k8s.io/v1/types.json#/11"
+    },
+    "flowcontrol.apiserver.k8s.io/FlowSchema@v1beta1": {
+      "$ref": "kubernetes/flowcontrol.apiserver.k8s.io/v1beta1/types.json#/32"
+    },
+    "flowcontrol.apiserver.k8s.io/PriorityLevelConfiguration@v1beta1": {
+      "$ref": "kubernetes/flowcontrol.apiserver.k8s.io/v1beta1/types.json#/46"
+    },
+    "flowcontrol.apiserver.k8s.io/FlowSchema@v1beta2": {
+      "$ref": "kubernetes/flowcontrol.apiserver.k8s.io/v1beta2/types.json#/32"
+    },
+    "flowcontrol.apiserver.k8s.io/PriorityLevelConfiguration@v1beta2": {
+      "$ref": "kubernetes/flowcontrol.apiserver.k8s.io/v1beta2/types.json#/46"
+    },
+    "internal.apiserver.k8s.io/StorageVersion@v1alpha1": {
+      "$ref": "kubernetes/internal.apiserver.k8s.io/v1alpha1/types.json#/15"
+    },
+    "networking.k8s.io/IngressClass@v1": {
+      "$ref": "kubernetes/networking.k8s.io/v1/types.json#/9"
+    },
+    "networking.k8s.io/Ingress@v1": {
+      "$ref": "kubernetes/networking.k8s.io/v1/types.json#/36"
+    },
+    "networking.k8s.io/NetworkPolicy@v1": {
+      "$ref": "kubernetes/networking.k8s.io/v1/types.json#/65"
+    },
+    "networking.k8s.io/ClusterCIDR@v1alpha1": {
+      "$ref": "kubernetes/networking.k8s.io/v1alpha1/types.json#/16"
+    },
+    "node.k8s.io/RuntimeClass@v1": {
+      "$ref": "kubernetes/node.k8s.io/v1/types.json#/14"
+    },
+    "policy/PodDisruptionBudget@v1": {
+      "$ref": "kubernetes/policy/v1/types.json#/18"
+    },
+    "rbac.authorization.k8s.io/ClusterRoleBinding@v1": {
+      "$ref": "kubernetes/rbac.authorization.k8s.io/v1/types.json#/10"
+    },
+    "rbac.authorization.k8s.io/ClusterRole@v1": {
+      "$ref": "kubernetes/rbac.authorization.k8s.io/v1/types.json#/31"
+    },
+    "rbac.authorization.k8s.io/RoleBinding@v1": {
+      "$ref": "kubernetes/rbac.authorization.k8s.io/v1/types.json#/39"
+    },
+    "rbac.authorization.k8s.io/Role@v1": {
+      "$ref": "kubernetes/rbac.authorization.k8s.io/v1/types.json#/47"
+    },
+    "scheduling.k8s.io/PriorityClass@v1": {
+      "$ref": "kubernetes/scheduling.k8s.io/v1/types.json#/9"
+    },
+    "storage.k8s.io/CSIDriver@v1": {
+      "$ref": "kubernetes/storage.k8s.io/v1/types.json#/13"
+    },
+    "storage.k8s.io/CSINode@v1": {
+      "$ref": "kubernetes/storage.k8s.io/v1/types.json#/25"
+    },
+    "storage.k8s.io/CSIStorageCapacity@v1": {
+      "$ref": "kubernetes/storage.k8s.io/v1/types.json#/37"
+    },
+    "storage.k8s.io/StorageClass@v1": {
+      "$ref": "kubernetes/storage.k8s.io/v1/types.json#/51"
+    },
+    "storage.k8s.io/VolumeAttachment@v1": {
+      "$ref": "kubernetes/storage.k8s.io/v1/types.json#/106"
+    },
+    "storage.k8s.io/CSIStorageCapacity@v1beta1": {
+      "$ref": "kubernetes/storage.k8s.io/v1beta1/types.json#/12"
+    }
+  },
+  "resourceFunctions": {},
+  "settings": {
+    "name": "kubernetes",
+    "version": "0.0.1",
+    "isSingleton": true,
+    "configurationType": {
+      "$ref": "config.json#/2"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "resources": {
+    "Script": {
+      "$ref": "types.json#/8"
+    },
+    "Wait": {
+      "$ref": "types.json#/10"
+    },
+    "Assert": {
+      "$ref": "types.json#/12"
+    }
+  },
+  "resourceFunctions": {},
+  "settings": {
+    "name": "Utils",
+    "version": "0.0.1",
+    "isSingleton": true
+  }
+}

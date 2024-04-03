@@ -1,0 +1,843 @@
+[
+  {
+    "$type": "StringLiteralType",
+    "value": "HorizontalPodAutoscaler"
+  },
+  {
+    "$type": "StringLiteralType",
+    "value": "autoscaling/v2beta2"
+  },
+  {
+    "$type": "StringType"
+  },
+  {
+    "$type": "ObjectType",
+    "name": "labels",
+    "properties": {},
+    "additionalProperties": {
+      "$ref": "#/2"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "annotations",
+    "properties": {},
+    "additionalProperties": {
+      "$ref": "#/2"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "metadata",
+    "properties": {
+      "name": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 9,
+        "description": "The name of the resource."
+      },
+      "namespace": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 8,
+        "description": "The namespace of the resource."
+      },
+      "labels": {
+        "type": {
+          "$ref": "#/3"
+        },
+        "flags": 0,
+        "description": "The labels for the resource."
+      },
+      "annotations": {
+        "type": {
+          "$ref": "#/4"
+        },
+        "flags": 0,
+        "description": "The annotations for the resource."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiAutoscalingV2Beta2HorizontalPodAutoscalerSpec",
+    "properties": {
+      "behavior": {
+        "type": {
+          "$ref": "#/7"
+        },
+        "flags": 0,
+        "description": "HorizontalPodAutoscalerBehavior configures the scaling behavior of the target in both Up and Down directions (scaleUp and scaleDown fields respectively)."
+      },
+      "maxReplicas": {
+        "type": {
+          "$ref": "#/10"
+        },
+        "flags": 1,
+        "description": "maxReplicas is the upper limit for the number of replicas to which the autoscaler can scale up. It cannot be less that minReplicas."
+      },
+      "metrics": {
+        "type": {
+          "$ref": "#/26"
+        },
+        "flags": 0,
+        "description": "metrics contains the specifications for which to use to calculate the desired replica count (the maximum replica count across all metrics will be used).  The desired replica count is calculated multiplying the ratio between the target value and the current value by the current number of pods.  Ergo, metrics used must decrease as the pod count is increased, and vice-versa.  See the individual metric source types for more information about how each type of metric must respond. If not set, the default metric will be set to 80% average CPU utilization."
+      },
+      "minReplicas": {
+        "type": {
+          "$ref": "#/10"
+        },
+        "flags": 0,
+        "description": "minReplicas is the lower limit for the number of replicas to which the autoscaler can scale down.  It defaults to 1 pod.  minReplicas is allowed to be 0 if the alpha feature gate HPAScaleToZero is enabled and at least one Object or External metric is configured.  Scaling is active as long as at least one metric value is available."
+      },
+      "scaleTargetRef": {
+        "type": {
+          "$ref": "#/23"
+        },
+        "flags": 1,
+        "description": "CrossVersionObjectReference contains enough information to let you identify the referred resource."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiAutoscalingV2Beta2HorizontalPodAutoscalerBehavior",
+    "properties": {
+      "scaleDown": {
+        "type": {
+          "$ref": "#/8"
+        },
+        "flags": 0,
+        "description": "HPAScalingRules configures the scaling behavior for one direction. These Rules are applied after calculating DesiredReplicas from metrics for the HPA. They can limit the scaling velocity by specifying scaling policies. They can prevent flapping by specifying the stabilization window, so that the number of replicas is not set instantly, instead, the safest value from the stabilization window is chosen."
+      },
+      "scaleUp": {
+        "type": {
+          "$ref": "#/8"
+        },
+        "flags": 0,
+        "description": "HPAScalingRules configures the scaling behavior for one direction. These Rules are applied after calculating DesiredReplicas from metrics for the HPA. They can limit the scaling velocity by specifying scaling policies. They can prevent flapping by specifying the stabilization window, so that the number of replicas is not set instantly, instead, the safest value from the stabilization window is chosen."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiAutoscalingV2Beta2HPAScalingRules",
+    "properties": {
+      "policies": {
+        "type": {
+          "$ref": "#/11"
+        },
+        "flags": 0,
+        "description": "policies is a list of potential scaling polices which can be used during scaling. At least one policy must be specified, otherwise the HPAScalingRules will be discarded as invalid"
+      },
+      "selectPolicy": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "selectPolicy is used to specify which policy should be used. If not set, the default value MaxPolicySelect is used."
+      },
+      "stabilizationWindowSeconds": {
+        "type": {
+          "$ref": "#/10"
+        },
+        "flags": 0,
+        "description": "StabilizationWindowSeconds is the number of seconds for which past recommendations should be considered while scaling up or scaling down. StabilizationWindowSeconds must be greater than or equal to zero and less than or equal to 3600 (one hour). If not set, use the default values: - For scale up: 0 (i.e. no stabilization is done). - For scale down: 300 (i.e. the stabilization window is 300 seconds long)."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiAutoscalingV2Beta2HPAScalingPolicy",
+    "properties": {
+      "periodSeconds": {
+        "type": {
+          "$ref": "#/10"
+        },
+        "flags": 1,
+        "description": "PeriodSeconds specifies the window of time for which the policy should hold true. PeriodSeconds must be greater than zero and less than or equal to 1800 (30 min)."
+      },
+      "type": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "Type is used to specify the scaling policy."
+      },
+      "value": {
+        "type": {
+          "$ref": "#/10"
+        },
+        "flags": 1,
+        "description": "Value contains the amount of change which is permitted by the policy. It must be greater than zero"
+      }
+    }
+  },
+  {
+    "$type": "IntegerType"
+  },
+  {
+    "$type": "ArrayType",
+    "itemType": {
+      "$ref": "#/9"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiAutoscalingV2Beta2MetricSpec",
+    "properties": {
+      "containerResource": {
+        "type": {
+          "$ref": "#/13"
+        },
+        "flags": 0,
+        "description": "ContainerResourceMetricSource indicates how to scale on a resource metric known to Kubernetes, as specified in requests and limits, describing each pod in the current scale target (e.g. CPU or memory).  The values will be averaged together before being compared to the target.  Such metrics are built in to Kubernetes, and have special scaling options on top of those available to normal per-pod metrics using the \"pods\" source.  Only one \"target\" type should be set."
+      },
+      "external": {
+        "type": {
+          "$ref": "#/15"
+        },
+        "flags": 0,
+        "description": "ExternalMetricSource indicates how to scale on a metric not associated with any Kubernetes object (for example length of queue in cloud messaging service, or QPS from loadbalancer running outside of cluster)."
+      },
+      "object": {
+        "type": {
+          "$ref": "#/22"
+        },
+        "flags": 0,
+        "description": "ObjectMetricSource indicates how to scale on a metric describing a kubernetes object (for example, hits-per-second on an Ingress object)."
+      },
+      "pods": {
+        "type": {
+          "$ref": "#/24"
+        },
+        "flags": 0,
+        "description": "PodsMetricSource indicates how to scale on a metric describing each pod in the current scale target (for example, transactions-processed-per-second). The values will be averaged together before being compared to the target value."
+      },
+      "resource": {
+        "type": {
+          "$ref": "#/25"
+        },
+        "flags": 0,
+        "description": "ResourceMetricSource indicates how to scale on a resource metric known to Kubernetes, as specified in requests and limits, describing each pod in the current scale target (e.g. CPU or memory).  The values will be averaged together before being compared to the target.  Such metrics are built in to Kubernetes, and have special scaling options on top of those available to normal per-pod metrics using the \"pods\" source.  Only one \"target\" type should be set."
+      },
+      "type": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "type is the type of metric source.  It should be one of \"ContainerResource\", \"External\", \"Object\", \"Pods\" or \"Resource\", each mapping to a matching field in the object. Note: \"ContainerResource\" type is available on when the feature-gate HPAContainerMetrics is enabled"
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiAutoscalingV2Beta2ContainerResourceMetricSource",
+    "properties": {
+      "container": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "container is the name of the container in the pods of the scaling target"
+      },
+      "name": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "name is the name of the resource in question."
+      },
+      "target": {
+        "type": {
+          "$ref": "#/14"
+        },
+        "flags": 1,
+        "description": "MetricTarget defines the target value, average value, or average utilization of a specific metric"
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiAutoscalingV2Beta2MetricTarget",
+    "properties": {
+      "averageUtilization": {
+        "type": {
+          "$ref": "#/10"
+        },
+        "flags": 0,
+        "description": "averageUtilization is the target value of the average of the resource metric across all relevant pods, represented as a percentage of the requested value of the resource for the pods. Currently only valid for Resource metric source type"
+      },
+      "averageValue": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "Quantity is a fixed-point representation of a number. It provides convenient marshaling/unmarshaling in JSON and YAML, in addition to String() and AsInt64() accessors.\n\nThe serialization format is:\n\n``` <quantity>        ::= <signedNumber><suffix>\n\n\t(Note that <suffix> may be empty, from the \"\" case in <decimalSI>.)\n\n<digit>           ::= 0 | 1 | ... | 9 <digits>          ::= <digit> | <digit><digits> <number>          ::= <digits> | <digits>.<digits> | <digits>. | .<digits> <sign>            ::= \"+\" | \"-\" <signedNumber>    ::= <number> | <sign><number> <suffix>          ::= <binarySI> | <decimalExponent> | <decimalSI> <binarySI>        ::= Ki | Mi | Gi | Ti | Pi | Ei\n\n\t(International System of units; See: http://physics.nist.gov/cuu/Units/binary.html)\n\n<decimalSI>       ::= m | \"\" | k | M | G | T | P | E\n\n\t(Note that 1024 = 1Ki but 1000 = 1k; I didn't choose the capitalization.)\n\n<decimalExponent> ::= \"e\" <signedNumber> | \"E\" <signedNumber> ```\n\nNo matter which of the three exponent forms is used, no quantity may represent a number greater than 2^63-1 in magnitude, nor may it have more than 3 decimal places. Numbers larger or more precise will be capped or rounded up. (E.g.: 0.1m will rounded up to 1m.) This may be extended in the future if we require larger or smaller quantities.\n\nWhen a Quantity is parsed from a string, it will remember the type of suffix it had, and will use the same type again when it is serialized.\n\nBefore serializing, Quantity will be put in \"canonical form\". This means that Exponent/suffix will be adjusted up or down (with a corresponding increase or decrease in Mantissa) such that:\n\n- No precision is lost - No fractional digits will be emitted - The exponent (or suffix) is as large as possible.\n\nThe sign will be omitted unless the number is negative.\n\nExamples:\n\n- 1.5 will be serialized as \"1500m\" - 1.5Gi will be serialized as \"1536Mi\"\n\nNote that the quantity will NEVER be internally represented by a floating point number. That is the whole point of this exercise.\n\nNon-canonical values will still parse as long as they are well formed, but will be re-emitted in their canonical form. (So always use canonical form, or don't diff.)\n\nThis format is intended to make it difficult to use these numbers without writing some sort of special handling code in the hopes that that will cause implementors to also use a fixed point implementation."
+      },
+      "type": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "type represents whether the metric type is Utilization, Value, or AverageValue"
+      },
+      "value": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "Quantity is a fixed-point representation of a number. It provides convenient marshaling/unmarshaling in JSON and YAML, in addition to String() and AsInt64() accessors.\n\nThe serialization format is:\n\n``` <quantity>        ::= <signedNumber><suffix>\n\n\t(Note that <suffix> may be empty, from the \"\" case in <decimalSI>.)\n\n<digit>           ::= 0 | 1 | ... | 9 <digits>          ::= <digit> | <digit><digits> <number>          ::= <digits> | <digits>.<digits> | <digits>. | .<digits> <sign>            ::= \"+\" | \"-\" <signedNumber>    ::= <number> | <sign><number> <suffix>          ::= <binarySI> | <decimalExponent> | <decimalSI> <binarySI>        ::= Ki | Mi | Gi | Ti | Pi | Ei\n\n\t(International System of units; See: http://physics.nist.gov/cuu/Units/binary.html)\n\n<decimalSI>       ::= m | \"\" | k | M | G | T | P | E\n\n\t(Note that 1024 = 1Ki but 1000 = 1k; I didn't choose the capitalization.)\n\n<decimalExponent> ::= \"e\" <signedNumber> | \"E\" <signedNumber> ```\n\nNo matter which of the three exponent forms is used, no quantity may represent a number greater than 2^63-1 in magnitude, nor may it have more than 3 decimal places. Numbers larger or more precise will be capped or rounded up. (E.g.: 0.1m will rounded up to 1m.) This may be extended in the future if we require larger or smaller quantities.\n\nWhen a Quantity is parsed from a string, it will remember the type of suffix it had, and will use the same type again when it is serialized.\n\nBefore serializing, Quantity will be put in \"canonical form\". This means that Exponent/suffix will be adjusted up or down (with a corresponding increase or decrease in Mantissa) such that:\n\n- No precision is lost - No fractional digits will be emitted - The exponent (or suffix) is as large as possible.\n\nThe sign will be omitted unless the number is negative.\n\nExamples:\n\n- 1.5 will be serialized as \"1500m\" - 1.5Gi will be serialized as \"1536Mi\"\n\nNote that the quantity will NEVER be internally represented by a floating point number. That is the whole point of this exercise.\n\nNon-canonical values will still parse as long as they are well formed, but will be re-emitted in their canonical form. (So always use canonical form, or don't diff.)\n\nThis format is intended to make it difficult to use these numbers without writing some sort of special handling code in the hopes that that will cause implementors to also use a fixed point implementation."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiAutoscalingV2Beta2ExternalMetricSource",
+    "properties": {
+      "metric": {
+        "type": {
+          "$ref": "#/16"
+        },
+        "flags": 1,
+        "description": "MetricIdentifier defines the name and optionally selector for a metric"
+      },
+      "target": {
+        "type": {
+          "$ref": "#/14"
+        },
+        "flags": 1,
+        "description": "MetricTarget defines the target value, average value, or average utilization of a specific metric"
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiAutoscalingV2Beta2MetricIdentifier",
+    "properties": {
+      "name": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "name is the name of the given metric"
+      },
+      "selector": {
+        "type": {
+          "$ref": "#/17"
+        },
+        "flags": 0,
+        "description": "A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApimachineryPkgApisMetaV1LabelSelector",
+    "properties": {
+      "matchExpressions": {
+        "type": {
+          "$ref": "#/20"
+        },
+        "flags": 0,
+        "description": "matchExpressions is a list of label selector requirements. The requirements are ANDed."
+      },
+      "matchLabels": {
+        "type": {
+          "$ref": "#/21"
+        },
+        "flags": 0,
+        "description": "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is \"key\", the operator is \"In\", and the values array contains only \"value\". The requirements are ANDed."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApimachineryPkgApisMetaV1LabelSelectorRequirement",
+    "properties": {
+      "key": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "key is the label key that the selector applies to."
+      },
+      "operator": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist."
+      },
+      "values": {
+        "type": {
+          "$ref": "#/19"
+        },
+        "flags": 0,
+        "description": "values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch."
+      }
+    }
+  },
+  {
+    "$type": "ArrayType",
+    "itemType": {
+      "$ref": "#/2"
+    }
+  },
+  {
+    "$type": "ArrayType",
+    "itemType": {
+      "$ref": "#/18"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApimachineryPkgApisMetaV1LabelSelectorMatchLabels",
+    "properties": {},
+    "additionalProperties": {
+      "$ref": "#/2"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiAutoscalingV2Beta2ObjectMetricSource",
+    "properties": {
+      "describedObject": {
+        "type": {
+          "$ref": "#/23"
+        },
+        "flags": 1,
+        "description": "CrossVersionObjectReference contains enough information to let you identify the referred resource."
+      },
+      "metric": {
+        "type": {
+          "$ref": "#/16"
+        },
+        "flags": 1,
+        "description": "MetricIdentifier defines the name and optionally selector for a metric"
+      },
+      "target": {
+        "type": {
+          "$ref": "#/14"
+        },
+        "flags": 1,
+        "description": "MetricTarget defines the target value, average value, or average utilization of a specific metric"
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiAutoscalingV2Beta2CrossVersionObjectReference",
+    "properties": {
+      "apiVersion": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "API version of the referent"
+      },
+      "kind": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "Kind of the referent; More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds\""
+      },
+      "name": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "Name of the referent; More info: http://kubernetes.io/docs/user-guide/identifiers#names"
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiAutoscalingV2Beta2PodsMetricSource",
+    "properties": {
+      "metric": {
+        "type": {
+          "$ref": "#/16"
+        },
+        "flags": 1,
+        "description": "MetricIdentifier defines the name and optionally selector for a metric"
+      },
+      "target": {
+        "type": {
+          "$ref": "#/14"
+        },
+        "flags": 1,
+        "description": "MetricTarget defines the target value, average value, or average utilization of a specific metric"
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiAutoscalingV2Beta2ResourceMetricSource",
+    "properties": {
+      "name": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "name is the name of the resource in question."
+      },
+      "target": {
+        "type": {
+          "$ref": "#/14"
+        },
+        "flags": 1,
+        "description": "MetricTarget defines the target value, average value, or average utilization of a specific metric"
+      }
+    }
+  },
+  {
+    "$type": "ArrayType",
+    "itemType": {
+      "$ref": "#/12"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiAutoscalingV2Beta2HorizontalPodAutoscalerStatus",
+    "properties": {
+      "conditions": {
+        "type": {
+          "$ref": "#/29"
+        },
+        "flags": 0,
+        "description": "conditions is the set of conditions required for this autoscaler to scale its target, and indicates whether or not those conditions are met."
+      },
+      "currentMetrics": {
+        "type": {
+          "$ref": "#/37"
+        },
+        "flags": 0,
+        "description": "currentMetrics is the last read state of the metrics used by this autoscaler."
+      },
+      "currentReplicas": {
+        "type": {
+          "$ref": "#/10"
+        },
+        "flags": 1,
+        "description": "currentReplicas is current number of replicas of pods managed by this autoscaler, as last seen by the autoscaler."
+      },
+      "desiredReplicas": {
+        "type": {
+          "$ref": "#/10"
+        },
+        "flags": 1,
+        "description": "desiredReplicas is the desired number of replicas of pods managed by this autoscaler, as last calculated by the autoscaler."
+      },
+      "lastScaleTime": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers."
+      },
+      "observedGeneration": {
+        "type": {
+          "$ref": "#/10"
+        },
+        "flags": 0,
+        "description": "observedGeneration is the most recent generation observed by this autoscaler."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiAutoscalingV2Beta2HorizontalPodAutoscalerCondition",
+    "properties": {
+      "lastTransitionTime": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers."
+      },
+      "message": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "message is a human-readable explanation containing details about the transition"
+      },
+      "reason": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "reason is the reason for the condition's last transition."
+      },
+      "status": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "status is the status of the condition (True, False, Unknown)"
+      },
+      "type": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "type describes the current condition"
+      }
+    }
+  },
+  {
+    "$type": "ArrayType",
+    "itemType": {
+      "$ref": "#/28"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiAutoscalingV2Beta2MetricStatus",
+    "properties": {
+      "containerResource": {
+        "type": {
+          "$ref": "#/31"
+        },
+        "flags": 0,
+        "description": "ContainerResourceMetricStatus indicates the current value of a resource metric known to Kubernetes, as specified in requests and limits, describing a single container in each pod in the current scale target (e.g. CPU or memory).  Such metrics are built in to Kubernetes, and have special scaling options on top of those available to normal per-pod metrics using the \"pods\" source."
+      },
+      "external": {
+        "type": {
+          "$ref": "#/33"
+        },
+        "flags": 0,
+        "description": "ExternalMetricStatus indicates the current value of a global metric not associated with any Kubernetes object."
+      },
+      "object": {
+        "type": {
+          "$ref": "#/34"
+        },
+        "flags": 0,
+        "description": "ObjectMetricStatus indicates the current value of a metric describing a kubernetes object (for example, hits-per-second on an Ingress object)."
+      },
+      "pods": {
+        "type": {
+          "$ref": "#/35"
+        },
+        "flags": 0,
+        "description": "PodsMetricStatus indicates the current value of a metric describing each pod in the current scale target (for example, transactions-processed-per-second)."
+      },
+      "resource": {
+        "type": {
+          "$ref": "#/36"
+        },
+        "flags": 0,
+        "description": "ResourceMetricStatus indicates the current value of a resource metric known to Kubernetes, as specified in requests and limits, describing each pod in the current scale target (e.g. CPU or memory).  Such metrics are built in to Kubernetes, and have special scaling options on top of those available to normal per-pod metrics using the \"pods\" source."
+      },
+      "type": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "type is the type of metric source.  It will be one of \"ContainerResource\", \"External\", \"Object\", \"Pods\" or \"Resource\", each corresponds to a matching field in the object. Note: \"ContainerResource\" type is available on when the feature-gate HPAContainerMetrics is enabled"
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiAutoscalingV2Beta2ContainerResourceMetricStatus",
+    "properties": {
+      "container": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "Container is the name of the container in the pods of the scaling target"
+      },
+      "current": {
+        "type": {
+          "$ref": "#/32"
+        },
+        "flags": 1,
+        "description": "MetricValueStatus holds the current value for a metric"
+      },
+      "name": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "Name is the name of the resource in question."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiAutoscalingV2Beta2MetricValueStatus",
+    "properties": {
+      "averageUtilization": {
+        "type": {
+          "$ref": "#/10"
+        },
+        "flags": 0,
+        "description": "currentAverageUtilization is the current value of the average of the resource metric across all relevant pods, represented as a percentage of the requested value of the resource for the pods."
+      },
+      "averageValue": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "Quantity is a fixed-point representation of a number. It provides convenient marshaling/unmarshaling in JSON and YAML, in addition to String() and AsInt64() accessors.\n\nThe serialization format is:\n\n``` <quantity>        ::= <signedNumber><suffix>\n\n\t(Note that <suffix> may be empty, from the \"\" case in <decimalSI>.)\n\n<digit>           ::= 0 | 1 | ... | 9 <digits>          ::= <digit> | <digit><digits> <number>          ::= <digits> | <digits>.<digits> | <digits>. | .<digits> <sign>            ::= \"+\" | \"-\" <signedNumber>    ::= <number> | <sign><number> <suffix>          ::= <binarySI> | <decimalExponent> | <decimalSI> <binarySI>        ::= Ki | Mi | Gi | Ti | Pi | Ei\n\n\t(International System of units; See: http://physics.nist.gov/cuu/Units/binary.html)\n\n<decimalSI>       ::= m | \"\" | k | M | G | T | P | E\n\n\t(Note that 1024 = 1Ki but 1000 = 1k; I didn't choose the capitalization.)\n\n<decimalExponent> ::= \"e\" <signedNumber> | \"E\" <signedNumber> ```\n\nNo matter which of the three exponent forms is used, no quantity may represent a number greater than 2^63-1 in magnitude, nor may it have more than 3 decimal places. Numbers larger or more precise will be capped or rounded up. (E.g.: 0.1m will rounded up to 1m.) This may be extended in the future if we require larger or smaller quantities.\n\nWhen a Quantity is parsed from a string, it will remember the type of suffix it had, and will use the same type again when it is serialized.\n\nBefore serializing, Quantity will be put in \"canonical form\". This means that Exponent/suffix will be adjusted up or down (with a corresponding increase or decrease in Mantissa) such that:\n\n- No precision is lost - No fractional digits will be emitted - The exponent (or suffix) is as large as possible.\n\nThe sign will be omitted unless the number is negative.\n\nExamples:\n\n- 1.5 will be serialized as \"1500m\" - 1.5Gi will be serialized as \"1536Mi\"\n\nNote that the quantity will NEVER be internally represented by a floating point number. That is the whole point of this exercise.\n\nNon-canonical values will still parse as long as they are well formed, but will be re-emitted in their canonical form. (So always use canonical form, or don't diff.)\n\nThis format is intended to make it difficult to use these numbers without writing some sort of special handling code in the hopes that that will cause implementors to also use a fixed point implementation."
+      },
+      "value": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "Quantity is a fixed-point representation of a number. It provides convenient marshaling/unmarshaling in JSON and YAML, in addition to String() and AsInt64() accessors.\n\nThe serialization format is:\n\n``` <quantity>        ::= <signedNumber><suffix>\n\n\t(Note that <suffix> may be empty, from the \"\" case in <decimalSI>.)\n\n<digit>           ::= 0 | 1 | ... | 9 <digits>          ::= <digit> | <digit><digits> <number>          ::= <digits> | <digits>.<digits> | <digits>. | .<digits> <sign>            ::= \"+\" | \"-\" <signedNumber>    ::= <number> | <sign><number> <suffix>          ::= <binarySI> | <decimalExponent> | <decimalSI> <binarySI>        ::= Ki | Mi | Gi | Ti | Pi | Ei\n\n\t(International System of units; See: http://physics.nist.gov/cuu/Units/binary.html)\n\n<decimalSI>       ::= m | \"\" | k | M | G | T | P | E\n\n\t(Note that 1024 = 1Ki but 1000 = 1k; I didn't choose the capitalization.)\n\n<decimalExponent> ::= \"e\" <signedNumber> | \"E\" <signedNumber> ```\n\nNo matter which of the three exponent forms is used, no quantity may represent a number greater than 2^63-1 in magnitude, nor may it have more than 3 decimal places. Numbers larger or more precise will be capped or rounded up. (E.g.: 0.1m will rounded up to 1m.) This may be extended in the future if we require larger or smaller quantities.\n\nWhen a Quantity is parsed from a string, it will remember the type of suffix it had, and will use the same type again when it is serialized.\n\nBefore serializing, Quantity will be put in \"canonical form\". This means that Exponent/suffix will be adjusted up or down (with a corresponding increase or decrease in Mantissa) such that:\n\n- No precision is lost - No fractional digits will be emitted - The exponent (or suffix) is as large as possible.\n\nThe sign will be omitted unless the number is negative.\n\nExamples:\n\n- 1.5 will be serialized as \"1500m\" - 1.5Gi will be serialized as \"1536Mi\"\n\nNote that the quantity will NEVER be internally represented by a floating point number. That is the whole point of this exercise.\n\nNon-canonical values will still parse as long as they are well formed, but will be re-emitted in their canonical form. (So always use canonical form, or don't diff.)\n\nThis format is intended to make it difficult to use these numbers without writing some sort of special handling code in the hopes that that will cause implementors to also use a fixed point implementation."
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiAutoscalingV2Beta2ExternalMetricStatus",
+    "properties": {
+      "current": {
+        "type": {
+          "$ref": "#/32"
+        },
+        "flags": 1,
+        "description": "MetricValueStatus holds the current value for a metric"
+      },
+      "metric": {
+        "type": {
+          "$ref": "#/16"
+        },
+        "flags": 1,
+        "description": "MetricIdentifier defines the name and optionally selector for a metric"
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiAutoscalingV2Beta2ObjectMetricStatus",
+    "properties": {
+      "current": {
+        "type": {
+          "$ref": "#/32"
+        },
+        "flags": 1,
+        "description": "MetricValueStatus holds the current value for a metric"
+      },
+      "describedObject": {
+        "type": {
+          "$ref": "#/23"
+        },
+        "flags": 1,
+        "description": "CrossVersionObjectReference contains enough information to let you identify the referred resource."
+      },
+      "metric": {
+        "type": {
+          "$ref": "#/16"
+        },
+        "flags": 1,
+        "description": "MetricIdentifier defines the name and optionally selector for a metric"
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiAutoscalingV2Beta2PodsMetricStatus",
+    "properties": {
+      "current": {
+        "type": {
+          "$ref": "#/32"
+        },
+        "flags": 1,
+        "description": "MetricValueStatus holds the current value for a metric"
+      },
+      "metric": {
+        "type": {
+          "$ref": "#/16"
+        },
+        "flags": 1,
+        "description": "MetricIdentifier defines the name and optionally selector for a metric"
+      }
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "IoK8SApiAutoscalingV2Beta2ResourceMetricStatus",
+    "properties": {
+      "current": {
+        "type": {
+          "$ref": "#/32"
+        },
+        "flags": 1,
+        "description": "MetricValueStatus holds the current value for a metric"
+      },
+      "name": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 1,
+        "description": "Name is the name of the resource in question."
+      }
+    }
+  },
+  {
+    "$type": "ArrayType",
+    "itemType": {
+      "$ref": "#/30"
+    }
+  },
+  {
+    "$type": "ObjectType",
+    "name": "autoscaling/HorizontalPodAutoscaler",
+    "properties": {
+      "kind": {
+        "type": {
+          "$ref": "#/0"
+        },
+        "flags": 10,
+        "description": "The resource kind."
+      },
+      "apiVersion": {
+        "type": {
+          "$ref": "#/1"
+        },
+        "flags": 10,
+        "description": "The api version."
+      },
+      "metadata": {
+        "type": {
+          "$ref": "#/5"
+        },
+        "flags": 1,
+        "description": "The resource metadata."
+      },
+      "spec": {
+        "type": {
+          "$ref": "#/6"
+        },
+        "flags": 0,
+        "description": "HorizontalPodAutoscalerSpec describes the desired functionality of the HorizontalPodAutoscaler."
+      },
+      "status": {
+        "type": {
+          "$ref": "#/27"
+        },
+        "flags": 0,
+        "description": "HorizontalPodAutoscalerStatus describes the current status of a horizontal pod autoscaler."
+      }
+    }
+  },
+  {
+    "$type": "ResourceType",
+    "name": "autoscaling/HorizontalPodAutoscaler@v2beta2",
+    "scopeType": 0,
+    "body": {
+      "$ref": "#/38"
+    },
+    "flags": 0
+  }
+]
