@@ -1,6 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-using Bicep.Extension.Rpc;
+using Bicep.Extension.Protocol;
 using Octokit;
 using Octokit.Internal;
 
@@ -12,7 +12,7 @@ public abstract class ResourceHandlerBase : IResourceHandler
 
     private async Task<ExtensibilityOperationResponse> HandleRequest(ExtensibilityOperationRequest request, Func<GitHubClient, Task<ExtensibilityOperationResponse>> onExecuteFunc)
     {
-        var credentials = new Credentials(request.Import.Config!["token"]!.ToObject<string>());
+        var credentials = new Credentials(request.Import.Config!["token"]!.GetValue<string>());
         var client = new GitHubClient(new ProductHeaderValue("Bicep.LocalDeploy"), new InMemoryCredentialStore(credentials));
 
         try

@@ -3,8 +3,7 @@
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
-using Bicep.Extension.Rpc;
-using Newtonsoft.Json.Linq;
+using Bicep.Extension.Protocol;
 using Octokit;
 
 namespace Bicep.Extension.Github.Handlers;
@@ -18,11 +17,11 @@ public class RepositoryResourceHandler : ResourceHandlerBase
 
     protected override async Task<ExtensibilityOperationResponse> Get(GitHubClient client, ExtensibilityOperationRequest request, CancellationToken cancellationToken)
     {
-        var owner = request.Resource.Properties!["owner"]!.ToObject<string>();
-        var name = request.Resource.Properties!["name"]!.ToObject<string>();
+        var owner = request.Resource.Properties!["owner"]!.GetValue<string>();
+        var name = request.Resource.Properties!["name"]!.GetValue<string>();
 
         var response = await client.Connection.Get<object>(ApiUrls.Repository(owner, name), null);
-        var body = JObject.Parse(response.Body.ToString()!);
+        var body = JsonNode.Parse(response.Body.ToString()!) as JsonObject;
 
         return new ExtensibilityOperationResponse(
             new(request.Resource.Type, body),
@@ -35,8 +34,8 @@ public class RepositoryResourceHandler : ResourceHandlerBase
 
     protected override async Task<ExtensibilityOperationResponse> Save(GitHubClient client, ExtensibilityOperationRequest request, CancellationToken cancellationToken)
     {
-        var owner = request.Resource.Properties!["owner"]!.ToObject<string>();
-        var name = request.Resource.Properties!["name"]!.ToObject<string>();
+        var owner = request.Resource.Properties!["owner"]!.GetValue<string>();
+        var name = request.Resource.Properties!["name"]!.GetValue<string>();
 
         var response = await client.Connection.Get<object>(ApiUrls.Repository(owner, name), null);
         if (response.HttpResponse.StatusCode == System.Net.HttpStatusCode.OK)
@@ -47,7 +46,7 @@ public class RepositoryResourceHandler : ResourceHandlerBase
         {
             response = await client.Connection.Put<object>(ApiUrls.Repository(owner, name), null);
         }
-        var body = JObject.Parse(response.Body.ToString()!);
+        var body = JsonNode.Parse(response.Body.ToString()!) as JsonObject;
 
         return new ExtensibilityOperationResponse(
             new(request.Resource.Type, body),
