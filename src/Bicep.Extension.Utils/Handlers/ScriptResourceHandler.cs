@@ -5,9 +5,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
-using Bicep.Extension.Rpc;
-using Newtonsoft.Json.Linq;
-using JsonConvert = Newtonsoft.Json.JsonConvert;
+using Bicep.Extension.Protocol;
 
 namespace Bicep.Extension.Utils.Handlers;
 
@@ -43,7 +41,7 @@ public class ScriptResourceHandler : IResourceHandler
     public async Task<ExtensibilityOperationResponse> Save(ExtensibilityOperationRequest request, CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
-        var body = JsonSerializer.Deserialize(JsonConvert.SerializeObject(request.Resource.Properties), SerializationContext.Default.RunScriptRequest)
+        var body = JsonSerializer.Deserialize(request.Resource.Properties, SerializationContext.Default.RunScriptRequest)
             ?? throw new InvalidOperationException("Failed to deserialize request body");
         
         var scriptOutput = body.type switch {
@@ -53,7 +51,7 @@ public class ScriptResourceHandler : IResourceHandler
         };
 
         return new ExtensibilityOperationResponse(
-            new ExtensibleResourceData(request.Resource.Type, JObject.Parse(JsonSerializer.Serialize(scriptOutput, SerializationContext.Default.RunScriptResponse))),
+            new ExtensibleResourceData(request.Resource.Type, JsonSerializer.SerializeToNode(scriptOutput, SerializationContext.Default.RunScriptResponse) as JsonObject),
             null,
             null);
     }

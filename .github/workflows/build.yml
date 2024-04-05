@@ -19,8 +19,8 @@ env:
   DOTNET_CLI_TELEMETRY_OPTOUT: true
 
 jobs:
-  build-vscode-ext:
-    name: "Build: VSCode Extension"
+  build:
+    name: "Build Dotnet code"
     runs-on: ubuntu-latest
 
     steps:

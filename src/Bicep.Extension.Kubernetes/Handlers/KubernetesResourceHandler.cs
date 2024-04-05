@@ -1,23 +1,20 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 using System.Collections.Immutable;
-using Newtonsoft.Json;
 using Azure.Deployments.Extensibility.Core.Exceptions;
 using Azure.Deployments.Extensibility.Providers.Kubernetes;
-using Bicep.Extension.Rpc;
+using Bicep.Extension.Protocol;
 using System.Diagnostics;
 using Azure.Deployments.Extensibility.Core.Json;
-using Newtonsoft.Json.Serialization;
+using System.Text.Json.Nodes;
+using System.Text.Json;
+using Core = Azure.Deployments.Extensibility.Core;
+using Json.More;
 
 namespace Bicep.Extension.Kubernetes.Handlers;
 
 public partial class KubernetesResourceHandler : IGenericResourceHandler
 {
-    private static readonly JsonSerializerSettings JsonSerializerSettings = new()
-    {
-        ContractResolver = new CamelCasePropertyNamesContractResolver(),
-    };
-
     public Task<ExtensibilityOperationResponse> Delete(ExtensibilityOperationRequest request, CancellationToken cancellationToken)
         => ExecuteRequest(request, (coreRequest) => new KubernetesProvider().DeleteAsync(coreRequest, cancellationToken));
 
@@ -48,19 +45,37 @@ public partial class KubernetesResourceHandler : IGenericResourceHandler
         }
     }
 
-    private static Azure.Deployments.Extensibility.Core.ExtensibilityOperationRequest Convert(ExtensibilityOperationRequest request)
+    private static Core.ExtensibilityOperationRequest Convert(ExtensibilityOperationRequest request)
     {
-        var serialized = JsonConvert.SerializeObject(request, JsonSerializerSettings);
-
-        return ExtensibilityJsonSerializer.Default.Deserialize<Azure.Deployments.Extensibility.Core.ExtensibilityOperationRequest>(serialized) 
-            ?? throw new InvalidOperationException($"Failed to deserialize {nameof(ExtensibilityOperationRequest)}");
+        return new(
+            new(request.Import.Provider, request.Import.Version, JsonSerializer.Deserialize<JsonElement>(request.Import.Config)),
+            new(request.Resource.Type, JsonSerializer.Deserialize<JsonElement>(request.Resource.Properties)));
     }
 
-    private static ExtensibilityOperationResponse Convert(Azure.Deployments.Extensibility.Core.ExtensibilityOperationResponse response)
+    private static ExtensibilityOperationResponse Convert(Core.ExtensibilityOperationResponse response)
     {
-        var serialized = ExtensibilityJsonSerializer.Default.Serialize(response);
+        switch (response)
+        {
+            case Core.ExtensibilityOperationErrorResponse errorResponse:
+                return new(
+                    null,
+                    null,
+                    errorResponse.Errors.Select(x => new ExtensibilityError(x.Code, x.Message, x.Target.ToString())).ToImmutableArray());
+            case Core.ExtensibilityOperationSuccessResponse successResponse:
+                return new(
+                    new(successResponse.Resource.Type, successResponse.Resource.Properties.AsNode() as JsonObject),
+                    successResponse.ResourceMetadata is {} metadata ? Convert(metadata) : null,
+                    ImmutableArray<ExtensibilityError>.Empty);
+            default:
+                throw new InvalidOperationException($"Unexpected response type: {response.GetType()}");
+        }
+    }
 
-        return JsonConvert.DeserializeObject<ExtensibilityOperationResponse>(serialized, JsonSerializerSettings)
-            ?? throw new InvalidOperationException($"Failed to deserialize {nameof(ExtensibilityOperationResponse)}");
+    private static ExtensibleResourceMetadata Convert(Core.ExtensibleResourceMetadata metadata)
+    {
+        return new(
+            metadata.ReadOnlyProperties?.Select(x => x.ToString()).ToImmutableArray(),
+            metadata.ImmutableProperties?.Select(x => x.ToString()).ToImmutableArray(),
+            metadata.DynamicProperties?.Select(x => x.ToString()).ToImmutableArray());
     }
 }

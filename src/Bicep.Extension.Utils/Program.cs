@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using Bicep.Extension.Protocol;
 using Bicep.Extension.Utils.Handlers;
 
 namespace Bicep.Extension.Utils;

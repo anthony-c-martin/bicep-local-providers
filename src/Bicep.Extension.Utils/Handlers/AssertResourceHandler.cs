@@ -2,9 +2,7 @@
 // Licensed under the MIT License.
 using System.Text.Json;
 using System.Text.Json.Nodes;
-using Bicep.Extension.Rpc;
-using Newtonsoft.Json.Linq;
-using JsonConvert = Newtonsoft.Json.JsonConvert;
+using Bicep.Extension.Protocol;
 
 namespace Bicep.Extension.Utils.Handlers;
 
@@ -30,7 +28,7 @@ public class AssertResourceHandler : IResourceHandler
     public async Task<ExtensibilityOperationResponse> Save(ExtensibilityOperationRequest request, CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
-        var body = JsonSerializer.Deserialize(JsonConvert.SerializeObject(request.Resource.Properties), SerializationContext.Default.AssertRequest)
+        var body = JsonSerializer.Deserialize(request.Resource.Properties, SerializationContext.Default.AssertRequest)
             ?? throw new InvalidOperationException("Failed to deserialize request body");
 
         if (!body.condition)
@@ -42,7 +40,7 @@ public class AssertResourceHandler : IResourceHandler
         }
 
         return new ExtensibilityOperationResponse(
-            new ExtensibleResourceData(request.Resource.Type, new JObject()),
+            new ExtensibleResourceData(request.Resource.Type, new JsonObject()),
             null,
             null);
     }

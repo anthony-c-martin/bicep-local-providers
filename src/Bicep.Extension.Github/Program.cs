@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using Bicep.Extension.Github.Handlers;
+using Bicep.Extension.Protocol;
 
 namespace Bicep.Extension.Github;
 
