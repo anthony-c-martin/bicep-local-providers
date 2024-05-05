@@ -11,6 +11,6 @@
 
   <ItemGroup>
     <ProjectReference Include="../Bicep.Extension/Bicep.Extension.csproj" />
-    <PackageReference Include="Azure.Deployments.Extensibility.Providers.Kubernetes" Version="0.1.45" />
+    <PackageReference Include="Azure.Deployments.Extensibility.Providers.Kubernetes" Version="0.1.49" />
   </ItemGroup>
 </Project>
