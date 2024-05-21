@@ -6,9 +6,10 @@
   },
   "cloud": {"credentialPrecedence": ["Environment"]},
   "providers": {
-    "kubernetes": "br:biceplocaldeploy.azurecr.io/providers/kubernetes:0.1.7",
-    "github": "br:biceplocaldeploy.azurecr.io/providers/github:0.1.7",
-    "utils": "br:biceplocaldeploy.azurecr.io/providers/utils:0.1.7"
+    "kubernetes": "br:biceplocaldeploy.azurecr.io/providers/kubernetes:0.1.8",
+    "utils": "br:biceplocaldeploy.azurecr.io/providers/utils:0.1.8",
+    "github": "br:biceplocaldeploy.azurecr.io/providers/github:0.1.8",
+    "http": "br:biceplocaldeploy.azurecr.io/providers/http:0.1.8"
   },
   "implicitProviders": []
 }
