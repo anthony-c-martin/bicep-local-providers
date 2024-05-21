@@ -48,12 +48,16 @@ jobs:
         provider:
           - name: Github
             publish-script: src/Bicep.Extension.Github/publish.sh
+            repo-path: providers/github
           - name: Kubernetes
             publish-script: src/Bicep.Extension.Kubernetes/publish.sh
+            repo-path: providers/kubernetes
           - name: Utils
             publish-script: src/Bicep.Extension.Utils/publish.sh
+            repo-path: providers/utils
           - name: Http
             publish-script: src/http/publish.sh
+            repo-path: providers/http
 
     steps:
       - uses: actions/checkout@v4
@@ -81,4 +85,6 @@ jobs:
         uses: dotnet/nbgv@v0.4.2
         
       - name: Publish Provider
-        run: bash ${{ matrix.provider.publish-script }} ${{ env.PROVIDERS_REGISTRY_NAME }} ${{ steps.nbgv.outputs.SimpleVersion }}
+        run: |
+          bash ${{ matrix.provider.publish-script }} \
+            "br:${{ env.PROVIDERS_REGISTRY_NAME }}.azurecr.io/${{ matrix.provider.repo-path }}:${{ steps.nbgv.outputs.SimpleVersion }}"
