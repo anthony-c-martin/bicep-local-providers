@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 option csharp_namespace = "Bicep.Extension.Rpc";
+option go_package = "bicep.azure.com/protos/extension";
 
 package extension;
 

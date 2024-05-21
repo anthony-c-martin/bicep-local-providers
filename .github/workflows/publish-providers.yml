@@ -52,6 +52,8 @@ jobs:
             publish-script: src/Bicep.Extension.Kubernetes/publish.sh
           - name: Utils
             publish-script: src/Bicep.Extension.Utils/publish.sh
+          - name: Http
+            publish-script: src/http/publish.sh
 
     steps:
       - uses: actions/checkout@v4

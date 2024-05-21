@@ -1,0 +1,73 @@
+[
+  {
+    "$type": "StringLiteralType",
+    "value": "raw"
+  },
+  {
+    "$type": "StringLiteralType",
+    "value": "json"
+  },
+  {
+    "$type": "UnionType",
+    "elements": [
+      {
+        "$ref": "#/0"
+      },
+      {
+        "$ref": "#/1"
+      }
+    ]
+  },
+  {
+    "$type": "StringType"
+  },
+  {
+    "$type": "IntegerType"
+  },
+  {
+    "$type": "AnyType"
+  },
+  {
+    "$type": "ObjectType",
+    "name": "HttpRequest",
+    "properties": {
+      "uri": {
+        "type": {
+          "$ref": "#/3"
+        },
+        "flags": 1,
+        "description": "The HTTP request URI to submit a GET request to."
+      },
+      "format": {
+        "type": {
+          "$ref": "#/2"
+        },
+        "flags": 0,
+        "description": "How to deserialize the response body."
+      },
+      "statusCode": {
+        "type": {
+          "$ref": "#/4"
+        },
+        "flags": 2,
+        "description": "The status code of the HTTP request."
+      },
+      "body": {
+        "type": {
+          "$ref": "#/5"
+        },
+        "flags": 2,
+        "description": "The parsed request body."
+      }
+    }
+  },
+  {
+    "$type": "ResourceType",
+    "name": "HttpRequest",
+    "scopeType": 0,
+    "body": {
+      "$ref": "#/6"
+    },
+    "flags": 0
+  }
+]
