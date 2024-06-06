@@ -15,8 +15,8 @@ dotnet publish --configuration release --self-contained true -r win-x64 $root
 # publish to the registry
 ~/.azure/bin/bicep publish-provider \
   "$root/types/index.json" \
-  --ext-osx-arm64 "$root/bin/release/net8.0/osx-arm64/publish/$ext_name" \
-  --ext-linux-x64 "$root/bin/release/net8.0/linux-x64/publish/$ext_name" \
-  --ext-win-x64 "$root/bin/release/net8.0/win-x64/publish/$ext_name.exe" \
+  --bin-osx-arm64 "$root/bin/release/net8.0/osx-arm64/publish/$ext_name" \
+  --bin-linux-x64 "$root/bin/release/net8.0/linux-x64/publish/$ext_name" \
+  --bin-win-x64 "$root/bin/release/net8.0/win-x64/publish/$ext_name.exe" \
   --target "$target" \
   --force

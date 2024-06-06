@@ -14,8 +14,8 @@ env GOOS=windows GOARCH=amd64 go build -C $root -o "build/http-win-x64.exe"
 # publish to the registry
 ~/.azure/bin/bicep publish-provider \
   "$root/types/index.json" \
-  --ext-osx-arm64 "$root/build/http-osx-arm64" \
-  --ext-linux-x64 "$root/build/http-linux-x64" \
-  --ext-win-x64 "$root/build/http-win-x64.exe" \
+  --bin-osx-arm64 "$root/build/http-osx-arm64" \
+  --bin-linux-x64 "$root/build/http-linux-x64" \
+  --bin-win-x64 "$root/build/http-win-x64.exe" \
   --target "$target" \
   --force
