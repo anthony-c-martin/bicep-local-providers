@@ -1,0 +1,3 @@
+[submodule "bicep"]
+	path = bicep
+	url = https://github.com/Azure/bicep.git

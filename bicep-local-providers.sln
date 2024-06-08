@@ -3,15 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3294B2A4-532C-4203-8995-E3490C2CDF8A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0A2777E6-FEA2-4317-AE81-74A5B2A02372}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bicep.Extension", "src\Bicep.Extension\Bicep.Extension.csproj", "{80B6274E-D005-44AE-B039-1E72AB75F178}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bicep.Local.Extension.GitHub", "src\Bicep.Local.Extension.Github\Bicep.Local.Extension.GitHub.csproj", "{F06D9437-69B9-4A2F-BAE5-D8A22331B385}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bicep.Extension.GitHub", "src\Bicep.Extension.Github\Bicep.Extension.GitHub.csproj", "{BE86EE0D-B085-4510-BB8C-422D2423619D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bicep.Local.Extension.Kubernetes", "src\Bicep.Local.Extension.Kubernetes\Bicep.Local.Extension.Kubernetes.csproj", "{7362C080-E5FD-4C2B-8052-8E570346C420}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bicep.Extension.Utils", "src\Bicep.Extension.Utils\Bicep.Extension.Utils.csproj", "{39990F3D-6452-4BA8-8717-DA0EC41963A5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bicep.Extension.Kubernetes", "src\Bicep.Extension.Kubernetes\Bicep.Extension.Kubernetes.csproj", "{EA8FD064-EE32-48B3-A60E-296B1BC93401}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bicep.Local.Extension.Utils", "src\Bicep.Local.Extension.Utils\Bicep.Local.Extension.Utils.csproj", "{8848AF5A-EF56-4162-9A34-8EAAD57A6321}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,27 +20,22 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{80B6274E-D005-44AE-B039-1E72AB75F178}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{80B6274E-D005-44AE-B039-1E72AB75F178}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{80B6274E-D005-44AE-B039-1E72AB75F178}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{80B6274E-D005-44AE-B039-1E72AB75F178}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BE86EE0D-B085-4510-BB8C-422D2423619D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BE86EE0D-B085-4510-BB8C-422D2423619D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BE86EE0D-B085-4510-BB8C-422D2423619D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BE86EE0D-B085-4510-BB8C-422D2423619D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{39990F3D-6452-4BA8-8717-DA0EC41963A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{39990F3D-6452-4BA8-8717-DA0EC41963A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{39990F3D-6452-4BA8-8717-DA0EC41963A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{39990F3D-6452-4BA8-8717-DA0EC41963A5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EA8FD064-EE32-48B3-A60E-296B1BC93401}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EA8FD064-EE32-48B3-A60E-296B1BC93401}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EA8FD064-EE32-48B3-A60E-296B1BC93401}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EA8FD064-EE32-48B3-A60E-296B1BC93401}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F06D9437-69B9-4A2F-BAE5-D8A22331B385}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F06D9437-69B9-4A2F-BAE5-D8A22331B385}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F06D9437-69B9-4A2F-BAE5-D8A22331B385}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F06D9437-69B9-4A2F-BAE5-D8A22331B385}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7362C080-E5FD-4C2B-8052-8E570346C420}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7362C080-E5FD-4C2B-8052-8E570346C420}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7362C080-E5FD-4C2B-8052-8E570346C420}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7362C080-E5FD-4C2B-8052-8E570346C420}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8848AF5A-EF56-4162-9A34-8EAAD57A6321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8848AF5A-EF56-4162-9A34-8EAAD57A6321}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8848AF5A-EF56-4162-9A34-8EAAD57A6321}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8848AF5A-EF56-4162-9A34-8EAAD57A6321}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{80B6274E-D005-44AE-B039-1E72AB75F178} = {3294B2A4-532C-4203-8995-E3490C2CDF8A}
-		{BE86EE0D-B085-4510-BB8C-422D2423619D} = {3294B2A4-532C-4203-8995-E3490C2CDF8A}
-		{39990F3D-6452-4BA8-8717-DA0EC41963A5} = {3294B2A4-532C-4203-8995-E3490C2CDF8A}
-		{EA8FD064-EE32-48B3-A60E-296B1BC93401} = {3294B2A4-532C-4203-8995-E3490C2CDF8A}
+		{F06D9437-69B9-4A2F-BAE5-D8A22331B385} = {0A2777E6-FEA2-4317-AE81-74A5B2A02372}
+		{7362C080-E5FD-4C2B-8052-8E570346C420} = {0A2777E6-FEA2-4317-AE81-74A5B2A02372}
+		{8848AF5A-EF56-4162-9A34-8EAAD57A6321} = {0A2777E6-FEA2-4317-AE81-74A5B2A02372}
 	EndGlobalSection
 EndGlobal
