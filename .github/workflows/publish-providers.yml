@@ -47,13 +47,13 @@ jobs:
       matrix:
         provider:
           - name: Github
-            publish-script: src/Bicep.Extension.Github/publish.sh
+            publish-script: src/Bicep.Local.Extension.Github/publish.sh
             repo-path: providers/github
           - name: Kubernetes
-            publish-script: src/Bicep.Extension.Kubernetes/publish.sh
+            publish-script: src/Bicep.Local.Extension.Kubernetes/publish.sh
             repo-path: providers/kubernetes
           - name: Utils
-            publish-script: src/Bicep.Extension.Utils/publish.sh
+            publish-script: src/Bicep.Local.Extension.Utils/publish.sh
             repo-path: providers/utils
           - name: Http
             publish-script: src/http/publish.sh
