@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Bicep.Local.Extension.Github</RootNamespace>
+    <StartupObject>Bicep.Local.Extension.Github.Program</StartupObject>
+    <AssemblyName>bicep-ext-github</AssemblyName>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <PublishSingleFile>true</PublishSingleFile>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../bicep/src/Bicep.Local.Extension/Bicep.Local.Extension.csproj" />
+    <ProjectReference Include="../../bicep/src/Bicep.Core/Bicep.Core.csproj" />
+    <PackageReference Include="Octokit" Version="10.0.0" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.63.0" />
+  </ItemGroup>
+</Project>
