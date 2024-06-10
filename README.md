@@ -13,17 +13,17 @@ https://github.com/anthony-c-martin/bicep/assets/38542602/b9450f54-7272-418b-8c5
 ### Mac/Linux
 ```sh
 # install the CLI to ~/.azure/bin/bicep
-bash <(curl -Ls https://aka.ms/bicep/nightly-cli.sh) --branch localdeploy
+bash <(curl -Ls https://aka.ms/bicep/nightly-cli.sh)
 # install the VSCode Extension
-bash <(curl -Ls https://aka.ms/bicep/nightly-vsix.sh) --branch localdeploy
+bash <(curl -Ls https://aka.ms/bicep/nightly-vsix.sh)
 ```
 
 ### Windows
 ```sh
 # install the CLI to ~/.azure/bin/bicep
-iex "& { $(irm https://aka.ms/bicep/nightly-cli.ps1) } -Branch localdeploy"
+iex "& { $(irm https://aka.ms/bicep/nightly-cli.ps1) }"
 # install the VSCode Extension
-iex "& { $(irm https://aka.ms/bicep/nightly-vsix.ps1) } -Branch localdeploy"
+iex "& { $(irm https://aka.ms/bicep/nightly-vsix.ps1) }"
 ```
 
 ## Running Samples
