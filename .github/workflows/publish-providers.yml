@@ -86,5 +86,7 @@ jobs:
         
       - name: Publish Provider
         run: |
-          bash ${{ matrix.provider.publish-script }} \
-            "br:${{ env.PROVIDERS_REGISTRY_NAME }}.azurecr.io/${{ matrix.provider.repo-path }}:${{ steps.nbgv.outputs.SimpleVersion }}"
+          target="br:${{ env.PROVIDERS_REGISTRY_NAME }}.azurecr.io/${{ matrix.provider.repo-path }}:${{ steps.nbgv.outputs.SimpleVersion }}"
+          bash ${{ matrix.provider.publish-script }} $target
+
+          echo "Published provider \`$target\`." >> $GITHUB_STEP_SUMMARY
