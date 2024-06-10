@@ -23,7 +23,7 @@ jobs:
       - name: Install Nightly
         env:
           GH_TOKEN: ${{ github.token }}
-        run: bash <(curl -Ls https://aka.ms/bicep/nightly-cli.sh) --branch localdeploy
+        run: bash <(curl -Ls https://aka.ms/bicep/nightly-cli.sh)
 
       - name: Start minikube
         uses: medyagh/setup-minikube@latest
