@@ -5,11 +5,11 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0A2777E6-FEA2-4317-AE81-74A5B2A02372}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bicep.Local.Extension.GitHub", "src\Bicep.Local.Extension.Github\Bicep.Local.Extension.GitHub.csproj", "{F06D9437-69B9-4A2F-BAE5-D8A22331B385}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bicep.Local.Extension.GitHub", "src\github\Bicep.Local.Extension.GitHub.csproj", "{F06D9437-69B9-4A2F-BAE5-D8A22331B385}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bicep.Local.Extension.Kubernetes", "src\Bicep.Local.Extension.Kubernetes\Bicep.Local.Extension.Kubernetes.csproj", "{7362C080-E5FD-4C2B-8052-8E570346C420}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bicep.Local.Extension.Kubernetes", "src\kubernetes\Bicep.Local.Extension.Kubernetes.csproj", "{7362C080-E5FD-4C2B-8052-8E570346C420}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bicep.Local.Extension.Utils", "src\Bicep.Local.Extension.Utils\Bicep.Local.Extension.Utils.csproj", "{8848AF5A-EF56-4162-9A34-8EAAD57A6321}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bicep.Local.Extension.Utils", "src\utils\Bicep.Local.Extension.Utils.csproj", "{8848AF5A-EF56-4162-9A34-8EAAD57A6321}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,7 +29,7 @@ Global
 		{7362C080-E5FD-4C2B-8052-8E570346C420}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7362C080-E5FD-4C2B-8052-8E570346C420}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8848AF5A-EF56-4162-9A34-8EAAD57A6321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8848AF5A-EF56-4162-9A34-8EAAD57A6321}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8848AF5A-EF56-4162-9A34-8EAAD57A6321}.Debug|Any CPU.Build.0 = Debug|Ay CPU
 		{8848AF5A-EF56-4162-9A34-8EAAD57A6321}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8848AF5A-EF56-4162-9A34-8EAAD57A6321}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
