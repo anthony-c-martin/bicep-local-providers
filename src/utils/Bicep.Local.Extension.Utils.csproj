@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="../../bicep/src/Bicep.Local.Extension/Bicep.Local.Extension.csproj" />
-    <ProjectReference Include="../../bicep/src/Bicep.Core/Bicep.Core.csproj" />
+    <PackageReference Include="Azure.Bicep.Types" Version="0.5.9" />
     <PackageReference Include="Grpc.AspNetCore" Version="2.63.0" />
   </ItemGroup>
 </Project>
