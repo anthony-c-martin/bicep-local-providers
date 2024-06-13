@@ -12,7 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="../../bicep/src/Bicep.Local.Extension/Bicep.Local.Extension.csproj" />
     <ProjectReference Include="../../bicep/src/Bicep.Core/Bicep.Core.csproj" />
-    <PackageReference Include="Azure.Deployments.Extensibility.Providers.Kubernetes" Version="0.1.45" />
+    <PackageReference Include="Azure.Deployments.Extensibility.Providers.Kubernetes" Version="0.1.49" />
     <PackageReference Include="Grpc.AspNetCore" Version="2.63.0" />
   </ItemGroup>
 </Project>
