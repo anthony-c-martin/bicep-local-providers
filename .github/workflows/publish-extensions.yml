@@ -1,4 +1,4 @@
-name: Publish Providers
+name: Publish Extensions
 
 on:
   push:
@@ -11,7 +11,7 @@ permissions:
 
 env:
   CI: true
-  PROVIDERS_REGISTRY_NAME: biceplocaldeploy
+  EXTENSIONS_REGISTRY_NAME: biceplocaldeploy
 
 jobs:
   deploy-acr:
@@ -27,37 +27,37 @@ jobs:
       - name: Log in to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.PROVIDERS_CLIENT_ID }}
-          tenant-id: ${{ secrets.PROVIDERS_TENANT_ID }}
-          subscription-id: ${{ secrets.PROVIDERS_SUBSCRIPTION_ID }}
+          client-id: ${{ secrets.EXTENSIONS_CLIENT_ID }}
+          tenant-id: ${{ secrets.EXTENSIONS_TENANT_ID }}
+          subscription-id: ${{ secrets.EXTENSIONS_SUBSCRIPTION_ID }}
 
       - name: Deploy
         uses: azure/CLI@v2
         with:
           inlineScript: |
             az deployment group create \
-              --resource-group ${{ env.PROVIDERS_REGISTRY_NAME }} \
+              --resource-group ${{ env.EXTENSIONS_REGISTRY_NAME }} \
               --parameters ./infra/main.bicepparam
 
-  publish-providers:
-    name: Publish ${{ matrix.provider.name }} Provider
+  publish-extensions:
+    name: Publish ${{ matrix.extension.name }} Extension
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        provider:
+        extension:
           - name: Github
             publish-script: src/github/publish.sh
-            repo-path: providers/github
+            repo-path: extensions/github
           - name: Kubernetes
             publish-script: src/kubernetes/publish.sh
-            repo-path: providers/kubernetes
+            repo-path: extensions/kubernetes
           - name: Utils
             publish-script: src/utils/publish.sh
-            repo-path: providers/utils
+            repo-path: extensions/utils
           - name: Http
             publish-script: src/http/publish.sh
-            repo-path: providers/http
+            repo-path: extensions/http
 
     steps:
       - uses: actions/checkout@v4
@@ -71,22 +71,20 @@ jobs:
       - name: Log in to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.PROVIDERS_CLIENT_ID }}
-          tenant-id: ${{ secrets.PROVIDERS_TENANT_ID }}
-          subscription-id: ${{ secrets.PROVIDERS_SUBSCRIPTION_ID }}
+          client-id: ${{ secrets.EXTENSIONS_CLIENT_ID }}
+          tenant-id: ${{ secrets.EXTENSIONS_TENANT_ID }}
+          subscription-id: ${{ secrets.EXTENSIONS_SUBSCRIPTION_ID }}
   
       - name: Intall CLI
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: bash <(curl -Ls https://aka.ms/bicep/nightly-cli.sh)
+        run: az bicep install
       
       - name: Run nbgv
         id: nbgv
         uses: dotnet/nbgv@v0.4.2
         
-      - name: Publish Provider
+      - name: Publish Extension
         run: |
-          target="br:${{ env.PROVIDERS_REGISTRY_NAME }}.azurecr.io/${{ matrix.provider.repo-path }}:${{ steps.nbgv.outputs.SimpleVersion }}"
-          bash ${{ matrix.provider.publish-script }} $target
+          target="br:${{ env.EXTENSIONS_REGISTRY_NAME }}.azurecr.io/${{ matrix.extension.repo-path }}:${{ steps.nbgv.outputs.SimpleVersion }}"
+          bash ${{ matrix.extension.publish-script }} $target
 
-          echo "Published provider \`$target\`." >> $GITHUB_STEP_SUMMARY
+          echo "Published extension \`$target\`." >> $GITHUB_STEP_SUMMARY

@@ -1,5 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
+using System.Text.Json.Nodes;
 using Bicep.Local.Extension.Protocol;
 using Octokit;
 using Octokit.Internal;
@@ -10,9 +11,9 @@ public abstract class ResourceHandlerBase : IResourceHandler
 {
     public abstract string ResourceType { get; }
 
-    private async Task<ExtensibilityOperationResponse> HandleRequest(ExtensibilityOperationRequest request, Func<GitHubClient, Task<ExtensibilityOperationResponse>> onExecuteFunc)
+    private async Task<LocalExtensibilityOperationResponse> HandleRequest(JsonObject? config, Func<GitHubClient, Task<LocalExtensibilityOperationResponse>> onExecuteFunc)
     {
-        var credentials = new Credentials(request.Import.Config!["token"]!.GetValue<string>());
+        var credentials = new Credentials(config!["token"]!.GetValue<string>());
         var client = new GitHubClient(new ProductHeaderValue("Bicep.LocalDeploy"), new InMemoryCredentialStore(credentials));
 
         try
@@ -21,30 +22,29 @@ public abstract class ResourceHandlerBase : IResourceHandler
         }
         catch (Exception exception)
         {
-            return new ExtensibilityOperationResponse(
+            return new LocalExtensibilityOperationResponse(
                 null,
-                null,
-                [new(request.Resource.Type, exception.Message, "")]);
+                new(new("UnhandledError", "", exception.Message, null, null)));
         }
     }
 
-    protected abstract Task<ExtensibilityOperationResponse> Delete(GitHubClient client, ExtensibilityOperationRequest request, CancellationToken cancellationToken);
+    protected abstract Task<LocalExtensibilityOperationResponse> CreateOrUpdate(GitHubClient client, ResourceSpecification request, CancellationToken cancellationToken);
 
-    public Task<ExtensibilityOperationResponse> Delete(ExtensibilityOperationRequest request, CancellationToken cancellationToken)
-        => HandleRequest(request, client => Delete(client, request, cancellationToken));
+    public Task<LocalExtensibilityOperationResponse> CreateOrUpdate(ResourceSpecification request, CancellationToken cancellationToken)
+        => HandleRequest(request.Config, client => CreateOrUpdate(client, request, cancellationToken));
 
-    protected abstract Task<ExtensibilityOperationResponse> Get(GitHubClient client, ExtensibilityOperationRequest request, CancellationToken cancellationToken);
+    protected abstract Task<LocalExtensibilityOperationResponse> Preview(GitHubClient client, ResourceSpecification request, CancellationToken cancellationToken);
 
-    public Task<ExtensibilityOperationResponse> Get(ExtensibilityOperationRequest request, CancellationToken cancellationToken)
-        => HandleRequest(request, client => Get(client, request, cancellationToken));
+    public Task<LocalExtensibilityOperationResponse> Preview(ResourceSpecification request, CancellationToken cancellationToken)
+        => HandleRequest(request.Config, client => Preview(client, request, cancellationToken));
 
-    protected abstract Task<ExtensibilityOperationResponse> PreviewSave(GitHubClient client, ExtensibilityOperationRequest request, CancellationToken cancellationToken);
+    protected abstract Task<LocalExtensibilityOperationResponse> Get(GitHubClient client, ResourceReference request, CancellationToken cancellationToken);
 
-    public Task<ExtensibilityOperationResponse> PreviewSave(ExtensibilityOperationRequest request, CancellationToken cancellationToken)
-        => HandleRequest(request, client => PreviewSave(client, request, cancellationToken));
+    public Task<LocalExtensibilityOperationResponse> Get(ResourceReference request, CancellationToken cancellationToken)
+        => HandleRequest(request.Config, client => Get(client, request, cancellationToken));
 
-    protected abstract Task<ExtensibilityOperationResponse> Save(GitHubClient client, ExtensibilityOperationRequest request, CancellationToken cancellationToken);
+    protected abstract Task<LocalExtensibilityOperationResponse> Delete(GitHubClient client, ResourceReference request, CancellationToken cancellationToken);
 
-    public Task<ExtensibilityOperationResponse> Save(ExtensibilityOperationRequest request, CancellationToken cancellationToken)
-        => HandleRequest(request, client => Save(client, request, cancellationToken));
+    public Task<LocalExtensibilityOperationResponse> Delete(ResourceReference request, CancellationToken cancellationToken)
+        => HandleRequest(request.Config, client => Delete(client, request, cancellationToken));
 }

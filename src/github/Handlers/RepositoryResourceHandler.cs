@@ -12,30 +12,48 @@ public class RepositoryResourceHandler : ResourceHandlerBase
 {
     public override string ResourceType => "Repository";
 
-    protected override Task<ExtensibilityOperationResponse> Delete(GitHubClient client, ExtensibilityOperationRequest request, CancellationToken cancellationToken)
+    private static (string owner, string name) GetIdentifiers(JsonObject properties)
+    {
+        return new(
+            properties["owner"]!.GetValue<string>(),
+            properties["name"]!.GetValue<string>());
+    }
+
+    private static JsonObject GetIdentifiersObject(string owner, string name)
+        => new()
+        {
+            ["owner"] = owner,
+            ["name"] = name
+        };
+
+    protected override Task<LocalExtensibilityOperationResponse> Delete(GitHubClient client, ResourceReference request, CancellationToken cancellationToken)
         => throw new NotImplementedException();
 
-    protected override async Task<ExtensibilityOperationResponse> Get(GitHubClient client, ExtensibilityOperationRequest request, CancellationToken cancellationToken)
+    protected override async Task<LocalExtensibilityOperationResponse> Get(GitHubClient client, ResourceReference request, CancellationToken cancellationToken)
     {
-        var owner = request.Resource.Properties!["owner"]!.GetValue<string>();
-        var name = request.Resource.Properties!["name"]!.GetValue<string>();
+        var identifiers = GetIdentifiers(request.Identifiers);
 
-        var response = await client.Connection.Get<object>(ApiUrls.Repository(owner, name), null);
+        var response = await client.Connection.Get<object>(ApiUrls.Repository(identifiers.owner, identifiers.name), null);
         var body = JsonNode.Parse(response.Body.ToString()!) as JsonObject;
 
-        return new ExtensibilityOperationResponse(
-            new(request.Resource.Type, body),
-            null,
+        return new(
+            new(request.Type, request.ApiVersion, "Succeeded", request.Identifiers, request.Config, body!),
             null);
     }
 
-    protected override Task<ExtensibilityOperationResponse> PreviewSave(GitHubClient client, ExtensibilityOperationRequest request, CancellationToken cancellationToken)
-        => throw new NotImplementedException();
-
-    protected override async Task<ExtensibilityOperationResponse> Save(GitHubClient client, ExtensibilityOperationRequest request, CancellationToken cancellationToken)
+    protected override async Task<LocalExtensibilityOperationResponse> Preview(GitHubClient client, ResourceSpecification request, CancellationToken cancellationToken)
     {
-        var owner = request.Resource.Properties!["owner"]!.GetValue<string>();
-        var name = request.Resource.Properties!["name"]!.GetValue<string>();
+        await Task.Yield();
+        var (owner, name) = GetIdentifiers(request.Properties);
+
+        return new(
+            new(request.Type, request.ApiVersion, "Succeeded", GetIdentifiersObject(owner, name), request.Config, GetIdentifiersObject(owner, name)),
+            null);
+    }
+
+    protected override async Task<LocalExtensibilityOperationResponse> CreateOrUpdate(GitHubClient client, ResourceSpecification request, CancellationToken cancellationToken)
+    {
+        var (owner, name) = GetIdentifiers(request.Properties);
 
         var response = await client.Connection.Get<object>(ApiUrls.Repository(owner, name), null);
         if (response.HttpResponse.StatusCode == System.Net.HttpStatusCode.OK)
@@ -48,9 +66,8 @@ public class RepositoryResourceHandler : ResourceHandlerBase
         }
         var body = JsonNode.Parse(response.Body.ToString()!) as JsonObject;
 
-        return new ExtensibilityOperationResponse(
-            new(request.Resource.Type, body),
-            null,
+        return new(
+            new(request.Type, request.ApiVersion, "Succeeded", GetIdentifiersObject(owner, name), request.Config, body!),
             null);
     }
 }

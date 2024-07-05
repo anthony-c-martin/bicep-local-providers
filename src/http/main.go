@@ -11,7 +11,7 @@ import (
 	"net/http"
 	"os"
 
-	"bicep_local_providers/http/bicep.azure.com/protos/extension"
+	extension "bicep_local_providers/http/bicep.azure.com/protos/extension"
 
 	"google.golang.org/grpc"
 )
@@ -52,10 +52,10 @@ type bicepExtensionServer struct {
 	extension.UnimplementedBicepExtensionServer
 }
 
-func buildError(err error) *extension.ExtensibilityOperationResponse {
-	return &extension.ExtensibilityOperationResponse{
-		Errors: []*extension.ExtensibilityError{
-			{
+func buildError(err error) *extension.LocalExtensibilityOperationResponse {
+	return &extension.LocalExtensibilityOperationResponse{
+		ErrorData: &extension.ErrorData{
+			Error: &extension.Error{
 				Code:    "UnexpectedError",
 				Message: err.Error(),
 			},
@@ -63,14 +63,14 @@ func buildError(err error) *extension.ExtensibilityOperationResponse {
 	}
 }
 
-func (s *bicepExtensionServer) Save(ctx context.Context, req *extension.ExtensibilityOperationRequest) (*extension.ExtensibilityOperationResponse, error) {
-	if req.Resource.Type != "HttpRequest" {
+func (s *bicepExtensionServer) CreateOrUpdate(ctx context.Context, req *extension.ResourceSpecification) (*extension.LocalExtensibilityOperationResponse, error) {
+	if req.Type != "HttpRequest" {
 		err := errors.New("invalid resource type")
 		return buildError(err), nil
 	}
 
 	var httpRequest HttpRequest
-	err := json.Unmarshal([]byte(*req.Resource.Properties), &httpRequest)
+	err := json.Unmarshal([]byte(req.Properties), &httpRequest)
 
 	if err != nil {
 		return buildError(err), nil
@@ -91,23 +91,27 @@ func (s *bicepExtensionServer) Save(ctx context.Context, req *extension.Extensib
 		return buildError(err), nil
 	}
 	propertiesString := string(properties)
+	succeededStatus := "Succeeded"
 
-	return &extension.ExtensibilityOperationResponse{
-		Resource: &extension.ExtensibleResourceData{
-			Type:       req.Resource.Type,
-			Properties: &propertiesString,
+	return &extension.LocalExtensibilityOperationResponse{
+		Resource: &extension.Resource{
+			Type:        req.Type,
+			ApiVersion:  req.ApiVersion,
+			Identifiers: "{}",
+			Properties:  propertiesString,
+			Status:      &succeededStatus,
 		},
 	}, nil
 }
 
-func (s *bicepExtensionServer) PreviewSave(ctx context.Context, req *extension.ExtensibilityOperationRequest) (*extension.ExtensibilityOperationResponse, error) {
-	if req.Resource.Type != "HttpRequest" {
+func (s *bicepExtensionServer) Preview(ctx context.Context, req *extension.ResourceSpecification) (*extension.LocalExtensibilityOperationResponse, error) {
+	if req.Type != "HttpRequest" {
 		err := errors.New("invalid resource type")
 		return buildError(err), nil
 	}
 
 	var httpRequest HttpRequest
-	err := json.Unmarshal([]byte(*req.Resource.Properties), &httpRequest)
+	err := json.Unmarshal([]byte(req.Properties), &httpRequest)
 
 	if err != nil {
 		return buildError(err), nil
@@ -118,21 +122,28 @@ func (s *bicepExtensionServer) PreviewSave(ctx context.Context, req *extension.E
 		return buildError(err), nil
 	}
 
-	return &extension.ExtensibilityOperationResponse{
-		Resource: req.Resource,
+	succeededStatus := "Succeeded"
+
+	return &extension.LocalExtensibilityOperationResponse{
+		Resource: &extension.Resource{
+			Type:        req.Type,
+			ApiVersion:  req.ApiVersion,
+			Identifiers: "{}",
+			Status:      &succeededStatus,
+		},
 	}, nil
 }
 
-func (s *bicepExtensionServer) Get(ctx context.Context, req *extension.ExtensibilityOperationRequest) (*extension.ExtensibilityOperationResponse, error) {
-	if req.Resource.Type != "HttpRequest" {
+func (s *bicepExtensionServer) Get(ctx context.Context, req *extension.ResourceReference) (*extension.LocalExtensibilityOperationResponse, error) {
+	if req.Type != "HttpRequest" {
 		return nil, errors.New("invalid resource type")
 	}
 
 	return nil, errors.ErrUnsupported
 }
 
-func (s *bicepExtensionServer) Delete(ctx context.Context, req *extension.ExtensibilityOperationRequest) (*extension.ExtensibilityOperationResponse, error) {
-	if req.Resource.Type != "HttpRequest" {
+func (s *bicepExtensionServer) Delete(ctx context.Context, req *extension.ResourceReference) (*extension.LocalExtensibilityOperationResponse, error) {
+	if req.Type != "HttpRequest" {
 		return nil, errors.New("invalid resource type")
 	}
 

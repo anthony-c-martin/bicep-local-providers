@@ -1,15 +1,15 @@
 {
   "experimentalFeaturesEnabled": {
     "extensibility": true,
-    "providerRegistry": true,
+    "extensionRegistry": true,
     "localDeploy": true
   },
   "cloud": {"credentialPrecedence": ["Environment"]},
-  "providers": {
-    "kubernetes": "br:biceplocaldeploy.azurecr.io/providers/kubernetes:0.1.27",
-    "utils": "br:biceplocaldeploy.azurecr.io/providers/utils:0.1.27",
-    "github": "br:biceplocaldeploy.azurecr.io/providers/github:0.1.27",
-    "http": "br:biceplocaldeploy.azurecr.io/providers/http:0.1.27"
+  "extensions": {
+    "kubernetes": "br:biceplocaldeploy.azurecr.io/extensions/kubernetes:0.1.27",
+    "utils": "br:biceplocaldeploy.azurecr.io/extensions/utils:0.1.27",
+    "github": "br:biceplocaldeploy.azurecr.io/extensions/github:0.1.27",
+    "http": "br:biceplocaldeploy.azurecr.io/extensions/http:0.1.27"
   },
-  "implicitProviders": []
+  "implicitExtensions": []
 }

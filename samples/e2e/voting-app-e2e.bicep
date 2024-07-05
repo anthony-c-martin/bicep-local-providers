@@ -1,4 +1,4 @@
-provider utils
+extension utils
 
 resource getKubeConfig 'Script' = {
   type: 'bash'

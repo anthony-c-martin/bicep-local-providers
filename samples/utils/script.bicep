@@ -1,4 +1,4 @@
-provider utils
+extension utils
 
 param name string
 param platform 'bash' | 'powershell'

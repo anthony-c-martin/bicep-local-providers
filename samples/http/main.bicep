@@ -1,4 +1,4 @@
-provider http
+extension http
 
 param coords {
   lattitude: string
