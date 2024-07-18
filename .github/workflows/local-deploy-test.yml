@@ -19,11 +19,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Install Nightly
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: bash <(curl -Ls https://aka.ms/bicep/nightly-cli.sh)
+  
+      - name: Intall CLI
+        run: az bicep install
 
       - name: Start minikube
         uses: medyagh/setup-minikube@latest

@@ -16,32 +16,30 @@ public class AssertResourceHandler : IResourceHandler
 {
     public string ResourceType => "Assert";
 
-    public Task<ExtensibilityOperationResponse> Delete(ExtensibilityOperationRequest request, CancellationToken cancellationToken)
+    public Task<LocalExtensibilityOperationResponse> Delete(ResourceReference request, CancellationToken cancellationToken)
         => throw new NotImplementedException();
 
-    public Task<ExtensibilityOperationResponse> Get(ExtensibilityOperationRequest request, CancellationToken cancellationToken)
+    public Task<LocalExtensibilityOperationResponse> Get(ResourceReference request, CancellationToken cancellationToken)
         => throw new NotImplementedException();
 
-    public Task<ExtensibilityOperationResponse> PreviewSave(ExtensibilityOperationRequest request, CancellationToken cancellationToken)
+    public Task<LocalExtensibilityOperationResponse> Preview(ResourceSpecification request, CancellationToken cancellationToken)
         => throw new NotImplementedException();
 
-    public async Task<ExtensibilityOperationResponse> Save(ExtensibilityOperationRequest request, CancellationToken cancellationToken)
+    public async Task<LocalExtensibilityOperationResponse> CreateOrUpdate(ResourceSpecification request, CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
-        var body = JsonSerializer.Deserialize(request.Resource.Properties, SerializationContext.Default.AssertRequest)
+        var body = JsonSerializer.Deserialize(request.Properties, SerializationContext.Default.AssertRequest)
             ?? throw new InvalidOperationException("Failed to deserialize request body");
 
         if (!body.condition)
         {
-            return new ExtensibilityOperationResponse(
+            return new(
                 null,
-                null,
-                [new("AssertionFailed", $"Assertion '{body.name}' failed!", "")]);
+                new(new("AssertionFailed", "", $"Assertion '{body.name}' failed!", null, null)));
         }
 
-        return new ExtensibilityOperationResponse(
-            new ExtensibleResourceData(request.Resource.Type, new JsonObject()),
-            null,
+        return new(
+            new(request.Type, request.ApiVersion, "Succeeded", new(), request.Config, new()),
             null);
     }
 }

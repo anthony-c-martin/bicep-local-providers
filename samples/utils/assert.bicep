@@ -1,4 +1,4 @@
-provider utils
+extension utils
 
 resource assert 'Assert' = {
   name: 'This should fail!'

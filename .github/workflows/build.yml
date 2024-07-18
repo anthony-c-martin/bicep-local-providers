@@ -9,7 +9,7 @@ on:
 
 jobs:
   build-dotnet:
-    name: "Build C# Providers"
+    name: "Build C# Extensions"
     runs-on: ubuntu-latest
 
     env:
@@ -30,7 +30,7 @@ jobs:
           dotnet build
 
   build-golang:
-    name: "Build Go Providers"
+    name: "Build Go Extensions"
     runs-on: ubuntu-latest
 
     steps:

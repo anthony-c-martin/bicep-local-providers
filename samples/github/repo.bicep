@@ -5,7 +5,7 @@ param owner string
 param repoName string
 param collaboratorName string
 
-provider github with {
+extension github with {
   token: githubToken
 }
 

@@ -39,6 +39,6 @@ if [[ -z $(az ad app federated-credential show --id $appId --federated-credentia
     --parameters '{"name":"'$repoName'","issuer":"https://token.actions.githubusercontent.com","subject":"'$repoSubject'","description":"GitHub OIDC Connection","audiences":["api://AzureADTokenExchange"]}' >/dev/null
 fi
 
-gh -R $repoOwner/$repoName secret set PROVIDERS_CLIENT_ID --body $appId
-gh -R $repoOwner/$repoName secret set PROVIDERS_SUBSCRIPTION_ID --body $subId
-gh -R $repoOwner/$repoName secret set PROVIDERS_TENANT_ID --body $tenantId
+gh -R $repoOwner/$repoName secret set EXTENSIONS_CLIENT_ID --body $appId
+gh -R $repoOwner/$repoName secret set EXTENSIONS_SUBSCRIPTION_ID --body $subId
+gh -R $repoOwner/$repoName secret set EXTENSIONS_TENANT_ID --body $tenantId

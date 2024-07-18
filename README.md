@@ -1,5 +1,5 @@
 # Local-only Bicep
-This document explains how to set up the experimental local-only deployment support for 3rd party extensibility providers, without a dependency on Azure.
+This document explains how to set up the experimental local-only deployment support for 3rd party extensions, without a dependency on Azure.
 
 Here's an example of deploying to a local kubernetes cluster, logging, and executing a bash script via terminal:
 
@@ -9,26 +9,9 @@ Here's an example of using VSCode to dpeloy to a local kubernetes cluster:
 
 https://github.com/anthony-c-martin/bicep/assets/38542602/b9450f54-7272-418b-8c5a-9c62f122d2b4
 
-## Installing
-### Mac/Linux
-```sh
-# install the CLI to ~/.azure/bin/bicep
-bash <(curl -Ls https://aka.ms/bicep/nightly-cli.sh)
-# install the VSCode Extension
-bash <(curl -Ls https://aka.ms/bicep/nightly-vsix.sh)
-```
-
-### Windows
-```sh
-# install the CLI to ~/.azure/bin/bicep
-iex "& { $(irm https://aka.ms/bicep/nightly-cli.ps1) }"
-# install the VSCode Extension
-iex "& { $(irm https://aka.ms/bicep/nightly-vsix.ps1) }"
-```
-
 ## Running Samples
 * Copy the full [samples](./samples) folder locally. You can use [this tool](https://download-directory.github.io/?url=https%3A%2F%2Fgithub.com%2Fanthony-c-martin%2Fbicep-local-providers%2Ftree%2Fmain%2Fsamples) to download it as a zip file.
-* For testing with the Kubernetes provider, you will need access to a cluster configured in your kubeconfig file. If you have Docker installed, this can be obtained by [Enabling Kubernetes Support](https://docs.docker.com/desktop/kubernetes/).
+* For testing with the Kubernetes extension, you will need access to a cluster configured in your kubeconfig file. If you have Docker installed, this can be obtained by [Enabling Kubernetes Support](https://docs.docker.com/desktop/kubernetes/).
 
 ### Via CLI
 Replace `<path_to_bicepparam>` with the path to the `.bicepparam` file you wish to deploy.
@@ -87,15 +70,15 @@ kubectl delete service echo-server
 
 Fetches a repo + contributor from GitHub.
 
-## Contributing new providers or types
-I'm happy to take contributions to this repo to extend experimental providers or add new ones. Please reach out to me via the issue tracker for more information.
+## Contributing new extensions or types
+I'm happy to take contributions to this repo to extend experimental extensions or add new ones. Please reach out to me via the issue tracker for more information.
 
 ## Caveats
 * There is currently no support for deploying Azure resources. Theoretically there's no reason why this can't work, I just haven't had the time to build it.
-* Provider binary packages are not currently signed. If you see the following error on Mac, you may need to manually sign the provider package:
-    > Failed to launch provider: Failed to connect to provider /Users/ant/.bicep/br/biceplocaldeploy.azurecr.io/providers$utils/0.1.1$/provider.bin
+* Extension binary packages are not currently signed. If you see the following error on Mac, you may need to manually sign the extension package:
+    > Failed to launch provider: Failed to connect to provider /Users/ant/.bicep/br/biceplocaldeploy.azurecr.io/extension$utils/0.1.1$/provider.bin
    
    To work around it, run the following in a terminal window, using the path from the error message:
    ```sh
-   codesign -s - '/Users/ant/.bicep/br/biceplocaldeploy.azurecr.io/providers$utils/0.1.1$/provider.bin'
+   codesign -s - '/Users/ant/.bicep/br/biceplocaldeploy.azurecr.io/extensions$utils/0.1.1$/provider.bin'
    ```

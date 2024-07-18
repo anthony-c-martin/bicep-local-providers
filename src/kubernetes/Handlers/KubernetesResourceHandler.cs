@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 using System.Collections.Immutable;
-using Azure.Deployments.Extensibility.Core.Exceptions;
 using Azure.Deployments.Extensibility.Providers.Kubernetes;
 using Bicep.Local.Extension.Protocol;
 using System.Diagnostics;
@@ -15,67 +14,55 @@ namespace Bicep.Local.Extension.Kubernetes.Handlers;
 
 public partial class KubernetesResourceHandler : IGenericResourceHandler
 {
-    public Task<ExtensibilityOperationResponse> Delete(ExtensibilityOperationRequest request, CancellationToken cancellationToken)
-        => ExecuteRequest(request, (coreRequest) => new KubernetesProvider().DeleteAsync(coreRequest, cancellationToken));
+    public async Task<LocalExtensibilityOperationResponse> Delete(Protocol.ResourceReference request, CancellationToken cancellationToken)
+        => Convert(await new KubernetesProvider().DeleteAsync(Convert(request), cancellationToken), request.Type, request.ApiVersion);
 
-    public Task<ExtensibilityOperationResponse> Get(ExtensibilityOperationRequest request, CancellationToken cancellationToken)
-        => ExecuteRequest(request, (coreRequest) => new KubernetesProvider().GetAsync(coreRequest, cancellationToken));
+    public async Task<LocalExtensibilityOperationResponse> Get(Protocol.ResourceReference request, CancellationToken cancellationToken)
+        => Convert(await new KubernetesProvider().GetAsync(Convert(request), cancellationToken), request.Type, request.ApiVersion);
 
-    public Task<ExtensibilityOperationResponse> PreviewSave(ExtensibilityOperationRequest request, CancellationToken cancellationToken)
-        => ExecuteRequest(request, (coreRequest) => new KubernetesProvider().PreviewSaveAsync(coreRequest, cancellationToken));
+    public async Task<LocalExtensibilityOperationResponse> Preview(Protocol.ResourceSpecification request, CancellationToken cancellationToken)
+        => Convert(await new KubernetesProvider().PreviewSaveAsync(Convert(request), cancellationToken), request.Type, request.ApiVersion);
 
-    public Task<ExtensibilityOperationResponse> Save(ExtensibilityOperationRequest request, CancellationToken cancellationToken)
-        => ExecuteRequest(request, (coreRequest) => new KubernetesProvider().SaveAsync(coreRequest, cancellationToken));
+    public async Task<LocalExtensibilityOperationResponse> CreateOrUpdate(Protocol.ResourceSpecification request, CancellationToken cancellationToken)
+        => Convert(await new KubernetesProvider().SaveAsync(Convert(request), cancellationToken), request.Type, request.ApiVersion);
 
-    private static async Task<ExtensibilityOperationResponse> ExecuteRequest(ExtensibilityOperationRequest request, Func<Azure.Deployments.Extensibility.Core.ExtensibilityOperationRequest, Task<Azure.Deployments.Extensibility.Core.ExtensibilityOperationResponse>> func)
-    {
-        try 
-        {
-            var coreRequest = Convert(request);
-            var coreResponse = await func(coreRequest);
-
-            return Convert(coreResponse);
-        }
-        catch (ExtensibilityException ex) when (ex.Errors.Any())
-        {
-            return new(
-                null,
-                null,
-                ex.Errors.Select(x => new ExtensibilityError(x.Code, x.Message, x.Target.ToString())).ToImmutableArray());
-        }
-    }
-
-    private static ExtCore.ExtensibilityOperationRequest Convert(ExtensibilityOperationRequest request)
+    private static ExtCore.ExtensibilityOperationRequest Convert(Protocol.ResourceSpecification request)
     {
         return new(
-            new(request.Import.Provider, request.Import.Version, JsonSerializer.Deserialize<JsonElement>(request.Import.Config)),
-            new(request.Resource.Type, JsonSerializer.Deserialize<JsonElement>(request.Resource.Properties)));
+            new("Kubernetes", "1.0.0", JsonSerializer.Deserialize<JsonElement>(request.Config)),
+            new(request.ApiVersion is {} ? $"{request.Type}@{request.ApiVersion}" : request.Type, JsonSerializer.Deserialize<JsonElement>(request.Properties)));
     }
 
-    private static ExtensibilityOperationResponse Convert(ExtCore.ExtensibilityOperationResponse response)
+    private static ExtCore.ExtensibilityOperationRequest Convert(Protocol.ResourceReference request)
+    {
+        return new(
+            new("Kubernetes", "1.0.0", JsonSerializer.Deserialize<JsonElement>(request.Config)),
+            new(request.ApiVersion is {} ? $"{request.Type}@{request.ApiVersion}" : request.Type, JsonSerializer.Deserialize<JsonElement>(request.Identifiers)));
+    }
+
+    private static Protocol.LocalExtensibilityOperationResponse Convert(ExtCore.ExtensibilityOperationResponse response, string type, string? apiVersion)
     {
         switch (response)
         {
             case ExtCore.ExtensibilityOperationErrorResponse errorResponse:
+                var errors = errorResponse.Errors.ToArray();
+                if (errors.Length > 1)
+                {
+                    return new(
+                        null,
+                        new(new("MultipleErrorsOccurred", "", "Multiple errors occurred", errorResponse.Errors.Select(x => new ErrorDetail(x.Code, x.Target.ToString(), x.Message)).ToArray(), null)));
+                }
+                
+                var error = errors.First();
                 return new(
                     null,
-                    null,
-                    errorResponse.Errors.Select(x => new ExtensibilityError(x.Code, x.Message, x.Target.ToString())).ToImmutableArray());
+                    new(new(error.Code, error.Target.ToString(), error.Message, null, null)));
             case ExtCore.ExtensibilityOperationSuccessResponse successResponse:
                 return new(
-                    new(successResponse.Resource.Type, successResponse.Resource.Properties.AsNode() as JsonObject),
-                    successResponse.ResourceMetadata is {} metadata ? Convert(metadata) : null,
-                    ImmutableArray<ExtensibilityError>.Empty);
+                    new(type, apiVersion, "Succeeded", JsonObject.Create(successResponse.Resource.Properties)!, null, JsonObject.Create(successResponse.Resource.Properties)!),
+                    null);
             default:
                 throw new InvalidOperationException($"Unexpected response type: {response.GetType()}");
         }
-    }
-
-    private static ExtensibleResourceMetadata Convert(ExtCore.ExtensibleResourceMetadata metadata)
-    {
-        return new(
-            metadata.ReadOnlyProperties?.Select(x => x.ToString()).ToImmutableArray(),
-            metadata.ImmutableProperties?.Select(x => x.ToString()).ToImmutableArray(),
-            metadata.DynamicProperties?.Select(x => x.ToString()).ToImmutableArray());
     }
 }

@@ -29,19 +29,19 @@ public class ScriptResourceHandler : IResourceHandler
 {
     public string ResourceType => "Script";
 
-    public Task<ExtensibilityOperationResponse> Delete(ExtensibilityOperationRequest request, CancellationToken cancellationToken)
+    public Task<LocalExtensibilityOperationResponse> Delete(ResourceReference request, CancellationToken cancellationToken)
         => throw new NotImplementedException();
 
-    public Task<ExtensibilityOperationResponse> Get(ExtensibilityOperationRequest request, CancellationToken cancellationToken)
+    public Task<LocalExtensibilityOperationResponse> Get(ResourceReference request, CancellationToken cancellationToken)
         => throw new NotImplementedException();
 
-    public Task<ExtensibilityOperationResponse> PreviewSave(ExtensibilityOperationRequest request, CancellationToken cancellationToken)
+    public Task<LocalExtensibilityOperationResponse> Preview(ResourceSpecification request, CancellationToken cancellationToken)
         => throw new NotImplementedException();
 
-    public async Task<ExtensibilityOperationResponse> Save(ExtensibilityOperationRequest request, CancellationToken cancellationToken)
+    public async Task<LocalExtensibilityOperationResponse> CreateOrUpdate(ResourceSpecification request, CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
-        var body = JsonSerializer.Deserialize(request.Resource.Properties, SerializationContext.Default.RunScriptRequest)
+        var body = JsonSerializer.Deserialize(request.Properties, SerializationContext.Default.RunScriptRequest)
             ?? throw new InvalidOperationException("Failed to deserialize request body");
         
         var scriptOutput = body.type switch {
@@ -50,9 +50,10 @@ public class ScriptResourceHandler : IResourceHandler
             _ => throw new InvalidOperationException($"Unknown script type '{body.type}'"),
         };
 
-        return new ExtensibilityOperationResponse(
-            new ExtensibleResourceData(request.Resource.Type, JsonSerializer.SerializeToNode(scriptOutput, SerializationContext.Default.RunScriptResponse) as JsonObject),
-            null,
+        var responseBody = JsonSerializer.SerializeToNode(scriptOutput, SerializationContext.Default.RunScriptResponse) as JsonObject;
+
+        return new(
+            new(request.Type, request.ApiVersion, "Succeeded", new(), request.Config, responseBody!),
             null);
     }
 

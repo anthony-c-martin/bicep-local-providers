@@ -3,7 +3,7 @@ param kubeConfig string
 
 param servicePort int = 8080
 
-provider kubernetes with {
+extension kubernetes with {
   kubeConfig: kubeConfig
   namespace: 'default'
 }
