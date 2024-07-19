@@ -76,7 +76,7 @@ jobs:
           subscription-id: ${{ secrets.EXTENSIONS_SUBSCRIPTION_ID }}
   
       - name: Intall CLI
-        run: az bicep install
+        run: az bicep install --version v0.29.45
       
       - name: Run nbgv
         id: nbgv
