@@ -30,14 +30,14 @@ public partial class KubernetesResourceHandler : IGenericResourceHandler
     {
         return new(
             new("Kubernetes", "1.0.0", JsonSerializer.Deserialize<JsonElement>(request.Config)),
-            new(request.ApiVersion is {} ? $"{request.Type}@{request.ApiVersion}" : request.Type, JsonSerializer.Deserialize<JsonElement>(request.Properties)));
+            new(string.IsNullOrEmpty(request.ApiVersion) ? request.Type : $"{request.Type}@{request.ApiVersion}", JsonSerializer.Deserialize<JsonElement>(request.Properties)));
     }
 
     private static ExtCore.ExtensibilityOperationRequest Convert(Protocol.ResourceReference request)
     {
         return new(
             new("Kubernetes", "1.0.0", JsonSerializer.Deserialize<JsonElement>(request.Config)),
-            new(request.ApiVersion is {} ? $"{request.Type}@{request.ApiVersion}" : request.Type, JsonSerializer.Deserialize<JsonElement>(request.Identifiers)));
+            new(string.IsNullOrEmpty(request.ApiVersion) ? request.Type : $"{request.Type}@{request.ApiVersion}", JsonSerializer.Deserialize<JsonElement>(request.Identifiers)));
     }
 
     private static Protocol.LocalExtensibilityOperationResponse Convert(ExtCore.ExtensibilityOperationResponse response, string type, string? apiVersion)
