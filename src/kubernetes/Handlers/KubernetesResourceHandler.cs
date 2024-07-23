@@ -1,46 +1,59 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 using System.Collections.Immutable;
-using Azure.Deployments.Extensibility.Providers.Kubernetes;
+using Azure.Deployments.Extensibility.Extensions.Kubernetes;
 using Bicep.Local.Extension.Protocol;
 using System.Diagnostics;
 using Azure.Deployments.Extensibility.Core.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json;
-using ExtCore = Azure.Deployments.Extensibility.Core;
 using Json.More;
+using System.Formats.Asn1;
+using Microsoft.Extensions.DependencyInjection;
+using Azure.Deployments.Extensibility.AspNetCore;
+using Azure.Deployments.Extensibility.Extensions.Kubernetes.DependencyInjection;
+using V2Models = Azure.Deployments.Extensibility.Core.V2.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace Bicep.Local.Extension.Kubernetes.Handlers;
 
 public partial class KubernetesResourceHandler : IGenericResourceHandler
 {
+    private static IExtension GetKubernetesExtension()
+    {
+        var serviceProvider = new ServiceCollection().AddKubernetesExtensionDispatcher().BuildServiceProvider();
+        var extensionDispatcher = serviceProvider.GetRequiredKeyedService<IExtensionDispatcher>("Kubernetes");
+
+        return extensionDispatcher.DispatchExtension("1.0.0");
+    }
+
     public async Task<LocalExtensibilityOperationResponse> Delete(Protocol.ResourceReference request, CancellationToken cancellationToken)
-        => Convert(await new KubernetesProvider().DeleteAsync(Convert(request), cancellationToken), request.Type, request.ApiVersion);
+        => Convert(await GetKubernetesExtension().DeleteResourceAsync(new(), Convert(request), cancellationToken), request.Type, request.ApiVersion);
 
     public async Task<LocalExtensibilityOperationResponse> Get(Protocol.ResourceReference request, CancellationToken cancellationToken)
-        => Convert(await new KubernetesProvider().GetAsync(Convert(request), cancellationToken), request.Type, request.ApiVersion);
+        => Convert(await GetKubernetesExtension().GetResourceAsync(new(), Convert(request), cancellationToken), request.Type, request.ApiVersion);
 
     public async Task<LocalExtensibilityOperationResponse> Preview(Protocol.ResourceSpecification request, CancellationToken cancellationToken)
-        => Convert(await new KubernetesProvider().PreviewSaveAsync(Convert(request), cancellationToken), request.Type, request.ApiVersion);
+        => Convert(await GetKubernetesExtension().PreviewResourceCreateOrUpdateAsync(new(), Convert(request), cancellationToken), request.Type, request.ApiVersion);
 
     public async Task<LocalExtensibilityOperationResponse> CreateOrUpdate(Protocol.ResourceSpecification request, CancellationToken cancellationToken)
-        => Convert(await new KubernetesProvider().SaveAsync(Convert(request), cancellationToken), request.Type, request.ApiVersion);
+        => Convert(await GetKubernetesExtension().CreateOrUpdateResourceAsync(new(), Convert(request), cancellationToken), request.Type, request.ApiVersion);
 
-    private static ExtCore.ExtensibilityOperationRequest Convert(Protocol.ResourceSpecification request)
-    {
-        return new(
-            new("Kubernetes", "1.0.0", JsonSerializer.Deserialize<JsonElement>(request.Config)),
-            new(request.ApiVersion is {} ? $"{request.Type}@{request.ApiVersion}" : request.Type, JsonSerializer.Deserialize<JsonElement>(request.Properties)));
-    }
+    private static V2Models.ResourceSpecification Convert(Protocol.ResourceSpecification request)
+        => new(
+            request.Type,
+            request.ApiVersion,
+            request.Properties,
+            request.Config);
 
-    private static ExtCore.ExtensibilityOperationRequest Convert(Protocol.ResourceReference request)
-    {
-        return new(
-            new("Kubernetes", "1.0.0", JsonSerializer.Deserialize<JsonElement>(request.Config)),
-            new(request.ApiVersion is {} ? $"{request.Type}@{request.ApiVersion}" : request.Type, JsonSerializer.Deserialize<JsonElement>(request.Identifiers)));
-    }
+    private static V2Models.ResourceReference Convert(Protocol.ResourceReference request)
+        => new(
+            request.Type,
+            request.ApiVersion,
+            request.Identifiers,
+            request.Config);
 
-    private static Protocol.LocalExtensibilityOperationResponse Convert(ExtCore.ExtensibilityOperationResponse response, string type, string? apiVersion)
+    private static Protocol.LocalExtensibilityOperationResponse Convert(IResult response, string type, string? apiVersion)
     {
         switch (response)
         {

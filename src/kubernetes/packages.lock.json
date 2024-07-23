@@ -22,15 +22,16 @@
           "System.Text.Json": "8.0.2"
         }
       },
-      "Azure.Deployments.Extensibility.Providers.Kubernetes": {
+      "Azure.Deployments.Extensibility.Extensions.Kubernetes": {
         "type": "Direct",
         "requested": "[0.1.55, )",
         "resolved": "0.1.55",
-        "contentHash": "4aDbA+mbxAL1JAJTBPaoj0TxucswrnsjUrRyfL1pjDAF+GOWtHCubnEAyh1Qs+XKW1ebQHVjyrG6VvkYnS7XQQ==",
+        "contentHash": "sl91WP0TrdwlRyTuZAJifLeGSwXaSZDBXDQg1SIQb2gP6OuT/PJeX9QOF/awe88LedVKv91zCMQ2Au1YFZODtw==",
         "dependencies": {
-          "Azure.Deployments.Extensibility.Core": "0.1.55",
+          "Azure.Deployments.Extensibility.AspNetCore": "0.1.55",
           "CsvHelper": "32.0.3",
-          "KubernetesClient": "14.0.2"
+          "KubernetesClient": "14.0.2",
+          "Semver": "2.3.0"
         }
       },
       "Grpc.AspNetCore": {
@@ -58,6 +59,14 @@
         "dependencies": {
           "Microsoft.Build.Tasks.Git": "8.0.0",
           "Microsoft.SourceLink.Common": "8.0.0"
+        }
+      },
+      "Azure.Deployments.Extensibility.AspNetCore": {
+        "type": "Transitive",
+        "resolved": "0.1.55",
+        "contentHash": "PL9FHLEUsTah5yIVSRiyp4aJC1xf1I2kP3yPFDSa+vBYfRD0aJrv78aa12xqP0mlpTay4UYgklJ4ycPqeWvSog==",
+        "dependencies": {
+          "Azure.Deployments.Extensibility.Core": "0.1.55"
         }
       },
       "Azure.Deployments.Extensibility.Core": {
@@ -310,6 +319,11 @@
         "type": "Transitive",
         "resolved": "8.0.0",
         "contentHash": "dk9JPxTCIevS75HyEQ0E4OVAFhB2N+V9ShCXf8Q6FkUQZDkgLI12y679Nym1YqsiSysuQskT7Z+6nUf3yab6Vw=="
+      },
+      "Semver": {
+        "type": "Transitive",
+        "resolved": "2.3.0",
+        "contentHash": "4vYo1zqn6pJ1YrhjuhuOSbIIm0CpM47grbpTJ5ABjOlfGt/EhMEM9ed4MRK5Jr6gVnntWDqOUzGeUJp68PZGjw=="
       },
       "System.Diagnostics.DiagnosticSource": {
         "type": "Transitive",
