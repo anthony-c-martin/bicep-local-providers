@@ -30,14 +30,12 @@ jobs:
           client-id: ${{ secrets.EXTENSIONS_CLIENT_ID }}
           tenant-id: ${{ secrets.EXTENSIONS_TENANT_ID }}
           subscription-id: ${{ secrets.EXTENSIONS_SUBSCRIPTION_ID }}
-
+  
       - name: Deploy
-        uses: azure/CLI@v2
-        with:
-          inlineScript: |
-            az deployment group create \
-              --resource-group ${{ env.EXTENSIONS_REGISTRY_NAME }} \
-              --parameters ./infra/main.bicepparam
+        run: |
+          az deployment group create \
+            --resource-group ${{ env.EXTENSIONS_REGISTRY_NAME }} \
+            --parameters ./infra/main.bicepparam
 
   publish-extensions:
     name: Publish ${{ matrix.extension.name }} Extension
