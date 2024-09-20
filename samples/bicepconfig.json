@@ -8,10 +8,10 @@
     "currentProfile": "AzureCloud"
   },
   "extensions": {
-    "kubernetes": "br:biceplocaldeploy.azurecr.io/extensions/kubernetes:0.1.35",
-    "utils": "br:biceplocaldeploy.azurecr.io/extensions/utils:0.1.35",
-    "github": "br:biceplocaldeploy.azurecr.io/extensions/github:0.1.35",
-    "http": "br:biceplocaldeploy.azurecr.io/extensions/http:0.1.35"
+    "kubernetes": "br:biceplocaldeploy.azurecr.io/extensions/kubernetes:0.1.36",
+    "utils": "br:biceplocaldeploy.azurecr.io/extensions/utils:0.1.36",
+    "github": "br:biceplocaldeploy.azurecr.io/extensions/github:0.1.36",
+    "http": "br:biceplocaldeploy.azurecr.io/extensions/http:0.1.36"
   },
   "implicitExtensions": []
 }
